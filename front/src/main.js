@@ -30,6 +30,11 @@ import Menu from 'primevue/menu';
 import Rating from 'primevue/rating';
 import InlineMessage from 'primevue/inlinemessage';
 
+import 'primeflex/primeflex.css'
+
+import DataView from 'primevue/dataview';
+
+
 const vuetify = createVuetify({
   components,
   directives,
@@ -65,6 +70,6 @@ app.component('Dropdown', Dropdown)
 app.component('Menu', Menu)
 app.component('Rating', Rating)
 app.component('InlineMessage', InlineMessage)
-
+app.component('DataView', DataView)
 app.mount('#app')
 

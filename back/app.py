@@ -1,15 +1,22 @@
 from src.webserver import create_app
-from src.domain.newphone import NewphoneRepository
-from src.domain.carrito import CarritoRepository
+from src.domain.customer_data import Customer_dataRepository
+from src.domain.order_data import Order_dataRepository
+from src.domain.order_packages import Order_packagesRepository
+from src.domain.delivery_note import Delivery_noteRepository
+from src.domain.returned_product import Returned_productRepository
+from src.domain.receptor_data import Receptor_dataRepository
 
 
 database_path = "data/database.db"
 
 repositories = {
-    "newphone": NewphoneRepository(database_path),
-    "carrito": CarritoRepository(database_path),
+    "customer_data": Customer_dataRepository(database_path),
+    "order_data": Order_dataRepository(database_path),
+    "order_packages": Order_packagesRepository(database_path),
+    "Delivery_note": Delivery_noteRepository(database_path),
+    "returned_product": Returned_productRepository(database_path),
+    "receptor_data": Receptor_dataRepository(database_path)
 }
 
 app = create_app(repositories)
-
 app.run(debug=True, host="0.0.0.0", port="5000")

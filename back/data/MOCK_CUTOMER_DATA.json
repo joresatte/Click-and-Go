@@ -1,0 +1,50 @@
+[
+    {"id":1,
+    "cliente":"Darn Chambers",
+    "dni":"0268-0131",
+    "address":"4752 Hoffman Drive",
+    "phone":"394 937 1775"
+    },
+    {"id":2,
+    "cliente":"Townsend Moakson",
+    "dni":"49999-608",
+    "address":"9 Victoria Junction",
+    "phone":"436 246 3857"
+    },
+    {"id":3,
+    "cliente":"Licha Breddy",
+    "dni":"35356-445",
+    "address":"67 Declaration Park",
+    "phone":"962 416 8222"
+    },
+    {"id":4,
+    "cliente":"Frannie Dolan",
+    "dni":"60760-985",
+    "address":"32108 Garrison Crossing",
+    "phone":"167 108 3639"
+    },
+    {"id":5,
+    "cliente":"Arlie Towhey",
+    "dni":"68151-4071",
+    "address":"064 Ludington Alley",
+    "phone":"411 714 9798"
+    },
+    {"id":6,
+    "cliente":"Devi Spry",
+    "dni":"68682-409",
+    "address":"7 Pawling Center",
+    "phone":"201 996 4027"
+    },
+    {"id":7,
+    "cliente":"Lyssa Leggett",
+    "dni":"11822-0708",
+    "address":"9 Talmadge Avenue",
+    "phone":"415 275 0894"
+    },
+    {"id":8,
+    "cliente":"Guillermo Jurgensen",
+    "dni":"67777-245",
+    "address":"78177 Twin Pines Street",
+    "phone":"757 659 8139"
+    }
+]
