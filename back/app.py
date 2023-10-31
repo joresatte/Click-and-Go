@@ -13,7 +13,7 @@ repositories = {
     "customer_data": Customer_dataRepository(database_path),
     "order_data": Order_dataRepository(database_path),
     "order_packages": Order_packagesRepository(database_path),
-    "Delivery_note": Delivery_noteRepository(database_path),
+    "delivery_note": Delivery_noteRepository(database_path),
     "returned_product": Returned_productRepository(database_path),
     "receptor_data": Receptor_dataRepository(database_path)
 }

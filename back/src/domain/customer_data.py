@@ -7,6 +7,8 @@
 
 from src.domain.utils import Utils as U
 from src.domain.table_fields import customer_table_fields as fields
+from src.domain.table_fields import delivery_note_table_fields as delivery_fields, delivery_note_table_save_fields as delivery_save_fields
+
 
 class Customer_data:
 
@@ -38,6 +40,7 @@ class Customer_dataRepository:
     
     def init_tables(self):
         sql = U.createTable(self, tables_variables= fields, tableName= "customers")
+        sql = U.create_data_tables(self, table_variables= delivery_fields, tableName= "delivery_notes")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -88,5 +91,22 @@ class Customer_dataRepository:
             sql,
             {"id": request.id, "dni": request.dni, "cliente": request.cliente, "address": request.address, "phone": request.phone}
             #request.to_dict()
+        )
+        self.save_delivery_note()
+        self.save_order_data()
+        self.save_order_packages()
+        self.save_receptor_data()
+        self.save_returned_product()
+        conn.commit()
+
+    def save_delivery_note(self, note):
+        sql= U.getFullSaveDynamicQuery(self, table_variables= delivery_save_fields, tableName= "delivery_notes")
+        print(sql)
+        conn= self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(
+            sql,
+            # {"id": note.id, "name": note.name, "email": note.email, "subject": note.subject, "comments": note.comments}
+            note.to_dict()
         )
         conn.commit()

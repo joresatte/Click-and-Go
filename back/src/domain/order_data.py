@@ -6,7 +6,7 @@
 # @modified date:
 
 from src.domain.utils import Utils as U
-from src.domain.table_fields import order_data_table_fields as fields
+from src.domain.table_fields import order_data_table_fields as fields, order_data_table_save_fields as save_fields
 
 class Order_data:
 
@@ -40,14 +40,6 @@ class Order_dataRepository:
         return conn
     
     def init_tables(self):
-        # sql= """
-        #         create table if not exists order_datas(
-        #                     'id', 'delivery_date', 'order_number',
-        #                     'delivery_time', 
-        #                     'delivery_time_interval', 'customer_id', 
-        #                     'FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE  CASCADE'
-        #         )
-        #      """
         sql = U.create_data_tables(self, table_variables= fields, tableName= "order_datas")
         conn= self.create_conn()
         cursor = conn.cursor()
@@ -64,7 +56,7 @@ class Order_dataRepository:
         return order
 
     def save(self, request):
-        sql= U.getFullSaveDynamicQuery(self, table_variables= fields, tableName= "order_datas")
+        sql= U.getFullSaveDynamicQuery(self, table_variables= save_fields, tableName= "order_datas")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(

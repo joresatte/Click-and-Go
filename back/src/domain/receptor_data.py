@@ -6,7 +6,7 @@
 # @modified date:
 
 from src.domain.utils import Utils as U
-from src.domain.table_fields import receptor_data_table_fields as fields
+from src.domain.table_fields import receptor_data_table_fields as fields, receptor_data_table_save_fields as save_fields
 
 class Receptor_data:
 
@@ -51,7 +51,7 @@ class Receptor_dataRepository:
         return receptor
 
     def save(self, note):
-        sql= U.getFullSaveDynamicQuery(self, table_variables= fields, tableName= "receptor_datas")
+        sql= U.getFullSaveDynamicQuery(self, table_variables= save_fields, tableName= "receptor_datas")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(

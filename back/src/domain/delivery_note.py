@@ -6,7 +6,8 @@
 # @modified date:
 
 from src.domain.utils import Utils as U
-from src.domain.table_fields import delivery_note_table_fields as fields
+from src.domain.table_fields import delivery_note_table_fields as delivery_fields, delivery_note_table_save_fields as delivery_save_fields
+
 
 class Delivery_note:
 
@@ -33,7 +34,7 @@ class Delivery_noteRepository:
         return conn
     
     def init_tables(self):
-        sql = U.create_data_tables(self, table_variables= fields, tableName= "delivery_notes")
+        sql = U.create_data_tables(self, table_variables= delivery_fields, tableName= "delivery_notes")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -49,7 +50,8 @@ class Delivery_noteRepository:
         return note
 
     def save(self, note):
-        sql= U.getFullSaveDynamicQuery(self, table_variables= fields, tableName= "delivery_notes")
+        sql= U.getFullSaveDynamicQuery(self, table_variables= delivery_save_fields, tableName= "delivery_notes")
+        print(sql)
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(

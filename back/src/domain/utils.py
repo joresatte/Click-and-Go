@@ -72,7 +72,6 @@ class Utils:
             query_parts.extend([ i for i in table_variables])
             query+= ', '.join(query_parts)
             query+=')'
-        print(query)
         return query
 
 

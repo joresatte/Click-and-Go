@@ -6,7 +6,7 @@
 # @modified date:
 
 from src.domain.utils import Utils as U
-from src.domain.table_fields import delivery_note_table_fields as fields
+from src.domain.table_fields import returned_product_table_fields as fields, returned_product_table_save_fields as save_fields
 
 class Returned_product:
 
@@ -56,7 +56,7 @@ class Returned_productRepository:
         return returned
 
     def save(self, note):
-        sql= U.getFullSaveDynamicQuery(self, table_variables= fields, tableName= "returned_products")
+        sql= U.getFullSaveDynamicQuery(self, table_variables= save_fields, tableName= "returned_products")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(

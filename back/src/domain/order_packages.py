@@ -6,7 +6,7 @@
 # @modified date:
 
 from src.domain.utils import Utils as U
-from src.domain.table_fields import orders_packages_table_fields as fields
+from src.domain.table_fields import orders_packages_table_fields as fields, orders_packages_table_save_fields as save_fields
 import json
 
 class Order_packages:
@@ -55,7 +55,7 @@ class Order_packagesRepository:
         return order_packages
 
     def save(self, request):
-        sql= U.getFullSaveDynamicQuery(self, table_variables= fields, tableName= "order_packages")
+        sql= U.getFullSaveDynamicQuery(self, table_variables= save_fields, tableName= "order_packages")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(

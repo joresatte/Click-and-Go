@@ -17,7 +17,7 @@ def test_get_one_customer_data():
     app = create_app(repositories={"customer_data": customer_data_repository})
     app = create_app(repositories={"order_data": order_data_repository})
     app = create_app(repositories={"order_packages": order_packages_repository})
-    app = create_app(repositories={"Delivery_note": delivery_note_repository})
+    app = create_app(repositories={"delivery_note": delivery_note_repository})
     app = create_app(repositories={"returned_product": return_product_repository})
     app = create_app(repositories={"receptor_data": receptor_data_repository})
     client = app.test_client()
@@ -41,7 +41,7 @@ def test_get_one_customer_data():
     first_cliente_order= Order_data(
         id=2,
         delivery_date="3/7/2023",
-        delivery_timed="12:00",
+        delivery_time="12:00",
         order_number=85,
         delivery_time_interval="12:00 - 12:30 ",
         customer_id= 1
