@@ -6,7 +6,7 @@
 # @modified date:
 
 from src.domain.utils import Utils as U
-from src.domain.table_fields import order_data_table_fields as fields, order_data_table_save_fields as save_fields
+from src.domain.table_fields import order_data_table_fields as order_data_fields, order_data_table_save_fields as order_data_save_fields
 
 class Order_data:
 
@@ -40,13 +40,13 @@ class Order_dataRepository:
         return conn
     
     def init_tables(self):
-        sql = U.create_data_tables(self, table_variables= fields, tableName= "order_datas")
+        sql = U.create_data_tables(self, table_variables= order_data_fields, tableName= "order_datas")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
         conn.commit()
 
-    def get_an_order(self, customer_id):
+    def get_an_order_data(self, customer_id):
         sql= U.fullGetDynamicQuery(self, fields=['*'], tableName='order_datas', listConditions=['customer_id'])
         conn = self.create_conn()
         cursor = conn.cursor()
@@ -55,13 +55,13 @@ class Order_dataRepository:
         order = Order_data(**data)
         return order
 
-    def save(self, request):
-        sql= U.getFullSaveDynamicQuery(self, table_variables= save_fields, tableName= "order_datas")
+    def save_order_data(self, record):
+        sql= U.getFullSaveDynamicQuery(self, table_variables= order_data_save_fields, tableName= "order_datas")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
             sql,
-            # {"id": request.id, "name": request.name, "email": request.email, "subject": request.subject, "comments": request.comments}
-            request.to_dict()
+            # {"id": record.id, "name": record.name, "email": record.email, "subject": record.subject, "comments": record.comments}
+            record.to_dict()
         )
         conn.commit()

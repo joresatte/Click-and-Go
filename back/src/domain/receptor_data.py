@@ -6,7 +6,7 @@
 # @modified date:
 
 from src.domain.utils import Utils as U
-from src.domain.table_fields import receptor_data_table_fields as fields, receptor_data_table_save_fields as save_fields
+from src.domain.table_fields import receptor_data_table_fields as receptor_data_fields, receptor_data_table_save_fields as receptor_data_save_fields
 
 class Receptor_data:
 
@@ -35,14 +35,14 @@ class Receptor_dataRepository:
         return conn
     
     def init_tables(self):
-        sql = U.create_data_tables(self, table_variables= fields, tableName= "receptor_datas")
+        sql = U.create_data_tables(self, table_variables= receptor_data_fields, tableName= "receptor_datas")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
         conn.commit()
 
     def get_the_receptor(self, customer_id):
-        sql= U.fullGetDynamicQuery(self, fields=['*'], tableName='order_datas', listConditions=['customer_id'])
+        sql= U.fullGetDynamicQuery(self, fields=['*'], tableName='receptor_datas', listConditions=['customer_id'])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, {'customre_id': customer_id})
@@ -50,13 +50,13 @@ class Receptor_dataRepository:
         receptor = Receptor_data(**data)
         return receptor
 
-    def save(self, note):
-        sql= U.getFullSaveDynamicQuery(self, table_variables= save_fields, tableName= "receptor_datas")
+    def save_receptor_data(self, record):
+        sql= U.getFullSaveDynamicQuery(self, table_variables= receptor_data_save_fields, tableName= "receptor_datas")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
             sql,
-            # {"id": note.id, "name": note.name, "email": note.email, "subject": note.subject, "comments": note.comments}
-            note.to_dict()
+            # {"id": record.id, "name": record.name, "email": record.email, "subject": record.subject, "comments": record.comments}
+            record.to_dict()
         )
         conn.commit()

@@ -22,8 +22,9 @@ def create_app(repositories):
     @app.route("/api/one_customer/<id>", methods=["GET"])
     def get_one_customer(id):
         one_customer = repositories['customer_data'].get_customer(id)
-        print(one_customer)
-        return object_to_json(one_customer)
+        if one_customer is not None:
+            return object_to_json(one_customer)
+
 
     @app.route("/api/remove_one_customer/<id>", methods=["DELETE"])
     def delete_one_customer(id):

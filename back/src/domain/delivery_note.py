@@ -40,7 +40,7 @@ class Delivery_noteRepository:
         cursor.execute(sql)
         conn.commit()
 
-    def get_note(self, customer_id):
+    def get_delivery_note(self, customer_id):
         sql= U.fullGetDynamicQuery(self, fields=['*'], tableName='delivery_notes', listConditions=['customer_id'])
         conn = self.create_conn()
         cursor = conn.cursor()
@@ -49,9 +49,8 @@ class Delivery_noteRepository:
         note = Delivery_note(**data)
         return note
 
-    def save(self, note):
+    def save_delivery_note(self, note):
         sql= U.getFullSaveDynamicQuery(self, table_variables= delivery_save_fields, tableName= "delivery_notes")
-        print(sql)
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(

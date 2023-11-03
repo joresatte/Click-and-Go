@@ -6,7 +6,7 @@
 # @modified date:
 
 from src.domain.utils import Utils as U
-from src.domain.table_fields import returned_product_table_fields as fields, returned_product_table_save_fields as save_fields
+from src.domain.table_fields import returned_product_table_fields as returned_product_fields, returned_product_table_save_fields as returned_product_save_fields
 
 class Returned_product:
 
@@ -40,14 +40,14 @@ class Returned_productRepository:
         return conn
     
     def init_tables(self):
-        sql = U.create_data_tables(self, table_variables= fields, tableName= "returned_products")
+        sql = U.create_data_tables(self, table_variables= returned_product_fields, tableName= "returned_products")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
         conn.commit()
 
-    def get_the_receptor(self, customer_id):
-        sql= U.fullGetDynamicQuery(self, fields=['*'], tableName='order_datas', listConditions=['customer_id'])
+    def get_the_returned(self, customer_id):
+        sql= U.fullGetDynamicQuery(self, fields=['*'], tableName='returned_products', listConditions=['customer_id'])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, {'customre_id': customer_id})
@@ -55,13 +55,13 @@ class Returned_productRepository:
         returned = Returned_product(**data)
         return returned
 
-    def save(self, note):
-        sql= U.getFullSaveDynamicQuery(self, table_variables= save_fields, tableName= "returned_products")
+    def save_returned_product(self, returned):
+        sql= U.getFullSaveDynamicQuery(self, table_variables= returned_product_save_fields, tableName= "returned_products")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
             sql,
-            # {"id": note.id, "name": note.name, "email": note.email, "subject": note.subject, "comments": note.comments}
-            note.to_dict()
+            # {"id": returned.id, "name": returned.name, "email": returned.email, "subject": returned.subject, "comments": returned.comments}
+            returned.to_dict()
         )
         conn.commit()

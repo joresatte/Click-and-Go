@@ -6,7 +6,7 @@
 # @modified date:
 
 from src.domain.utils import Utils as U
-from src.domain.table_fields import orders_packages_table_fields as fields, orders_packages_table_save_fields as save_fields
+from src.domain.table_fields import orders_packages_table_fields as orders_packages_fields, orders_packages_table_save_fields as orders_packages_save_fields
 import json
 
 class Order_packages:
@@ -39,7 +39,7 @@ class Order_packagesRepository:
         return conn
     
     def init_tables(self):
-        sql = U.create_data_tables(self, table_variables= fields, tableName= "order_packages")
+        sql = U.create_data_tables(self, table_variables= orders_packages_fields, tableName= "order_packages")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql)
@@ -54,16 +54,16 @@ class Order_packagesRepository:
         order_packages = Order_packages(**data)
         return order_packages
 
-    def save(self, request):
-        sql= U.getFullSaveDynamicQuery(self, table_variables= save_fields, tableName= "order_packages")
+    def save_order_packages(self, record):
+        sql= U.getFullSaveDynamicQuery(self, table_variables= orders_packages_save_fields, tableName= "order_packages")
         conn= self.create_conn()
         cursor = conn.cursor()
         cursor.execute(
             sql,
-            {"id": request.id, 
-             "drawers": json.dumps(request.drawers), 
-             "bags":json.dumps (request.bags), 
-             "substitutions": request.substitutions, 
-             "customer_id": request.customer_id}
+            {"id": record.id, 
+             "drawers": json.dumps(record.drawers), 
+             "bags":json.dumps (record.bags), 
+             "substitutions": record.substitutions, 
+             "customer_id": record.customer_id}
         )
         conn.commit()

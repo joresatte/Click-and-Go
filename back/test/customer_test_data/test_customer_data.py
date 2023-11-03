@@ -12,35 +12,167 @@ def test_get_customers_data():
         cliente="Darn Chambers",
         dni="0268-0131",
         address="4752 Hoffman Drive",
-        phone="394 937 1775"
+        phone="394 937 1775",
+        delivery_note= {
+            'id':'12',
+            'note':"Construction Expeditor",
+            'customer_id':'1'},
+        order_data= {
+            'id':'2',
+            'delivery_date':"3/7/2023",
+            'delivery_time':"12:00",
+            'order_number':'85',
+            'delivery_time_interval':"12:00 - 12:30 ",
+            'customer_id': '2'
+        },
+        orders_packages= {
+            'id':'3',
+            'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
+            'bags':{"cold":'2', "frozen":'1'},
+            'substitutions': "No",
+            'customer_id':'1' 
+        },
+        receptor_data= {
+            'id':'6',
+            'name':"Wallas Mulhall",
+            'DNI':"0899397964",
+            'customer_id':'1'
+        },
+        returned_product= {
+            'id':'2',
+            'description':"Project Manager",
+            'unity':'2',
+            'return_reason':"",
+            'order_number':"",
+            'customer_id':'1'
+        }
     )
     second_cliente= Customer_data(
         id=2,
         cliente="Townsend Moakson",
         dni="49999-608",
         address="9 Victoria Junction",
-        phone="436 246 3857"
+        phone="436 246 3857",
+        delivery_note= {
+            'id':'12',
+            'note':"Construction Expeditor",
+            'customer_id':'1'},
+        order_data= {
+            'id':'2',
+            'delivery_date':"3/7/2023",
+            'delivery_time':"12:00",
+            'order_number':'85',
+            'delivery_time_interval':"12:00 - 12:30 ",
+            'customer_id': '2'
+        },
+        orders_packages= {
+            'id':'3',
+            'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
+            'bags':{"cold":'2', "frozen":'1'},
+            'substitutions': "No",
+            'customer_id':'1' 
+        },
+        receptor_data= {
+            'id':'6',
+            'name':"Wallas Mulhall",
+            'DNI':"0899397964",
+            'customer_id':'1'
+        },
+        returned_product= {
+            'id':'2',
+            'description':"Project Manager",
+            'unity':'2',
+            'return_reason':"",
+            'order_number':"",
+            'customer_id':'1'
+        }
     )
 
-    customer_repository.save(first_cliente)
-    customer_repository.save(second_cliente)
+    customer_repository.save_customer(first_cliente)
+    customer_repository.save_customer(second_cliente)
 
     response = client.get("/api/all_customers")
     if len(response.json)!= 2:
         assert False, 'fail assertion'
     assert response.json ==[
-        {"id":"1",
-        "cliente":"Darn Chambers",
-        "dni":"0268-0131",
-        "address":"4752 Hoffman Drive",
-        "phone":"394 937 1775"
+            {"id":"1",
+            "cliente":"Darn Chambers",
+            "dni":"0268-0131",
+            "address":"4752 Hoffman Drive",
+            "phone":"394 937 1775",
+            'delivery_note': {
+                'id':'12',
+                'note':"Construction Expeditor",
+                'customer_id':'1'},
+            'order_data': {
+                'id':'2',
+                'delivery_date':"3/7/2023",
+                'delivery_time':"12:00",
+                'order_number':'85',
+                'delivery_time_interval':"12:00 - 12:30 ",
+                'customer_id': '2'
+            },
+            'orders_packages': {
+                'id':'3',
+                'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
+                'bags':{"cold":'2', "frozen":'1'},
+                'substitutions': "No",
+                'customer_id':'1' 
+            },
+            'receptor_data': {
+                'id':'6',
+                'name':"Wallas Mulhall",
+                'DNI':"0899397964",
+                'customer_id':'1'
+            },
+            'returned_product': {
+                'id':'2',
+                'description':"Project Manager",
+                'unity':'2',
+                'return_reason':"",
+                'order_number':"",
+                'customer_id':'1'
+            }
         },
-        {"id":"2",
-        "cliente":"Townsend Moakson",
-        "dni":"49999-608",
-        "address":"9 Victoria Junction",
-        "phone":"436 246 3857"
-        },
+            {"id":"2",
+            "cliente":"Townsend Moakson",
+            "dni":"49999-608",
+            "address":"9 Victoria Junction",
+            "phone":"436 246 3857",
+            'delivery_note': {
+                'id':'12',
+                'note':"Construction Expeditor",
+                'customer_id':'1'},
+            'order_data': {
+                'id':'2',
+                'delivery_date':"3/7/2023",
+                'delivery_time':"12:00",
+                'order_number':'85',
+                'delivery_time_interval':"12:00 - 12:30 ",
+                'customer_id': '2'
+            },
+            'orders_packages': {
+                'id':'3',
+                'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
+                'bags':{"cold":'2', "frozen":'1'},
+                'substitutions': "No",
+                'customer_id':'1' 
+            },
+            'receptor_data': {
+                'id':'6',
+                'name':"Wallas Mulhall",
+                'DNI':"0899397964",
+                'customer_id':'1'
+            },
+            'returned_product': {
+                'id':'2',
+                'description':"Project Manager",
+                'unity':'2',
+                'return_reason':"",
+                'order_number':"",
+                'customer_id':'1'
+            }
+        }
     ]
 
     
