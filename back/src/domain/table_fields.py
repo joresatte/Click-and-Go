@@ -5,6 +5,7 @@
 # @modified by: 
 # @modified date:
 
+
 customer_table_fields= [ 'id', 'cliente', 'dni', 
                          'address', 'phone', 'delivery_note',
                          'order_data', 'orders_packages', 'receptor_data', 'returned_product']
@@ -31,6 +32,7 @@ receptor_data_table_fields= ['id', 'name',
                              'DNI', 'customer_id',
                              'FOREIGN KEY(customer_id) REFERENCES customers(id) ON DELETE  CASCADE']
 
+employee_data_table_fields= ['id', 'identification', 'password']
 
 
 

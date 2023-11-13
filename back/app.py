@@ -5,7 +5,7 @@ from src.domain.order_packages import Order_packagesRepository
 from src.domain.delivery_note import Delivery_noteRepository
 from src.domain.returned_product import Returned_productRepository
 from src.domain.receptor_data import Receptor_dataRepository
-
+from src.domain.employee import Employee_Repository 
 
 database_path = "data/database.db"
 
@@ -15,7 +15,8 @@ repositories = {
     "order_packages": Order_packagesRepository(database_path),
     "delivery_note": Delivery_noteRepository(database_path),
     "returned_product": Returned_productRepository(database_path),
-    "receptor_data": Receptor_dataRepository(database_path)
+    "receptor_data": Receptor_dataRepository(database_path),
+    "employee_data": Employee_Repository(database_path)
 }
 
 app = create_app(repositories)
