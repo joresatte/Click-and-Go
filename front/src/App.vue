@@ -1,85 +1,68 @@
+<template>
+  <div class=" page-label"><h1 >{{label}}</h1></div>
+  <loginEmployee 
+    :login="loginUser"
+    @onChanged="onChanged"
+    @onclicked=" onclicked"
+  />
+  <Toast />
+</template>
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { ref, reactive} from 'vue';
+import config from "@/config.js";
+import loginEmployee from './components/loginEmployee.vue';
+// import getLoginPost from './views/apiSrevives/getLoginPost';
+// import {useFetch} from './views/apiSrevives/loginPost'
+import { useToast } from "primevue/usetoast";
+import { useRouter, useRoute } from 'vue-router'
+const toast = useToast();
+const router = useRouter()
+const route = useRoute()
+const label= ref('Eroski')
+const loginUser = reactive({
+  identification: '',
+  password: ''
+})
+
+const onChanged=(e)=>{
+  loginUser.value= e
+}
+
+async function onclicked(){
+  console.log('Send button clicked')
+  const settings = reactive({
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        identification: loginUser['identification'],
+        password: loginUser['password']
+    }),
+  })
+  if(loginUser['identification'] && loginUser['password'] != ''){
+        const response = await fetch(`${config.login_Path}/get_login/Authenticated`, settings)
+        const requestStatusCode = response.status
+        console.log('request Status Code ', requestStatusCode)
+        if(requestStatusCode==200){
+          // toast.add({ severity: 'success', summary: 'success Message', detail: 'Successfully', group: 'bl', life: 1000 });
+          router.push({
+                        path: '/',
+                        name: 'home'
+                      })
+        }
+        else{
+          toast.add({ severity: 'error', summary: 'Error Message', detail: 'Failed to login', life: 4000 });
+      }
+  }else{
+    toast.add({ severity: 'error', summary: 'Error Message', detail: 'All fields are required', life: 3000 });
+  }
+}
 </script>
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
-</template>
-
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
+.page-label{
   text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
+  color: red;
 }
 </style>
