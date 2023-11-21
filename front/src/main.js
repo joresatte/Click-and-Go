@@ -4,10 +4,12 @@ import router from './router'
 import PrimeVue from 'primevue/config';
 
 import Button from 'primevue/button';
-// import 'primevue/resources/themes/saga-blue/theme.css';
+
 import "primevue/resources/themes/lara-light-indigo/theme.css";
 import 'primevue/resources/primevue.min.css';                
 import 'primeicons/primeicons.css';
+import 'primeflex/primeflex.css'
+import DataView from 'primevue/dataview';
 import InputText from 'primevue/inputtext';
 import Toast from 'primevue/toast';
 import ToastService from 'primevue/toastservice';
@@ -24,6 +26,8 @@ import Menu from 'primevue/menu';
 import Rating from 'primevue/rating';
 import InlineMessage from 'primevue/inlinemessage';
 import Password from 'primevue/password';
+import Tag from 'primevue/tag';
+import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'   // optional
 
 
 const app= createApp(App);
@@ -32,6 +36,8 @@ app.use(PrimeVue)
 app.use(router)
 app.directive('tooltip', Tooltip);
 
+app.component('DataView', DataView)
+app.component('Tag', Tag)
 app.component('Button', Button)
 app.component('Toast', Toast)
 app.component('InputText', InputText)
@@ -41,6 +47,7 @@ app.component('Sidebar', Sidebar)
 app.component('FileUpload', FileUpload)
 app.component('InputNumber', InputNumber)
 app.component('ColorPicker', ColorPicker)
+app.component('DataViewLayoutOptions', DataViewLayoutOptions)
 app.component('MultiSelect', MultiSelect)
 app.component('Textarea', Textarea)
 app.component('Dropdown', Dropdown)
