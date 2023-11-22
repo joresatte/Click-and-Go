@@ -1,5 +1,8 @@
 <template>
-  <div class="card">
+  <div class="block bg-primary font-bold text-center p-4 border-round mb-3" style="margin-top: 10%;" v-if="showLoad">
+    <div class="showLoad">{{ load }}</div>
+  </div>
+  <div class="card" v-if="showDataView">
       <DataView :value="customers" :layout="layout" :sortOrder="sortOrder" :sortField="sortField">
           <template #header>
               <div class="overflow-hidden">
@@ -19,7 +22,7 @@
                   </div>
               </div>
           </template>
-              <template #list="" v-for="index in customers" :key="index.id">
+              <template #list="" v-for="index in listToDisplay" :key="index.id">
                   <div class="col-12" >
                       <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4" >
                           <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
@@ -28,8 +31,7 @@
                                   <div class="text-2xl font-bold text-900">{{ index.cliente }}</div>
                                   <span class="font-semibold">{{ index.address }}</span>
                                   <span class="font-semibold">{{ index.dni }}</span>
-                                  <!-- <Rating :modelValue="slotProps.data.rating" readonly :cancel="false"></Rating> -->
-                                  <div class="flex align-items-center gap-3">
+                                    <div class="flex align-items-center gap-3">
                                       <span class="flex align-items-center gap-2">
                                           <i class="pi pi-tag"></i>
                                       </span>
@@ -47,11 +49,10 @@
                       </div>
                   </div>
               </template>
-              <template #grid="" v-for="index in customers" :key="index.id">
+              <template #grid="" v-for="index in listToDisplay" :key="index.id">
                   <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" >
                       <div class="p-4 border-1 surface-border surface-card border-round" >
                           <div class="flex flex-wrap align-items-center justify-content-between gap-2">
-                              <!-- <Tag :value="slotProps.data.inventoryStatus" :severity="getSeverity(slotProps.data)"></Tag> -->
                           </div>
                           <div class="flex flex-column align-items-center gap-3 py-5">
                               <img class="w-4 sm:w-5rem xl:w-2rem shadow-2 block xl:block mx-auto border-round" src="@/assets/img/_copy.jpg" alt="image client" />
@@ -85,7 +86,7 @@
 
 <script setup>
 import config from "@/config.js";
-import { ref, onMounted, computed} from "vue";
+import { ref, onMounted, computed, reactive} from "vue";
 import { useRouter } from 'vue-router'
 
 onMounted(() => {
@@ -100,18 +101,34 @@ const sortOptions = ref([
   {label: 'Entregdo', value: 'Success'},
   {label: 'No entregdo', value: '!Success'},
 ]);
-const customers = ref();
+const customers = ref([]);
 const layout = ref('grid');
 const error= ref(null)
 let loading= ref(false)
 const router = useRouter()
-
+const load= ref('Loading...')
+const showDataView= ref(false)
+const showLoad= ref(true)
+const listToDisplay= reactive([])
 const loadData= async ()=>{
-const response = await fetch(`${config.login_Path}/all_customers`)
-          .catch((err) => (error.value = err))
-  customers.value= await response.json()
+    const response = await fetch(`${config.login_Path}/all_customers`)
+    const responseStatus= response.statusText
+    console.log('responseStatus is:', responseStatus)
+    if(responseStatus== "OK")
+    {customers.value= await response.json() 
+        showLoad.value= false
+        showDataView.value= true
+    console.table(customers.value)
+    for(const item of customers.value){
+        listToDisplay.push(item)
+        console.table('listToDisplay',listToDisplay)
+    }
+    }
+    else{
+        showLoad.value= true
+        showDataView.value= false
+    }
 }
-
 async function onclicked(e){
   console.log(e)
   localStorage.setItem('pathId', JSON.stringify(e))
@@ -140,9 +157,8 @@ computed(()=>{
   console.Console(filterCustomers)
 })
 
-const isValidFilter= async ()=>{
-  console.log(await customers.value)
-  for (const item of loadData){
+const isValidFilter= ()=>{
+  for (const item of listToDisplay){
       if (
           item.cliente.toLowerCase().includes(filterByText.value.toLowerCase())||
           item.dni.toLowerCase().includes(filterByText.value.toLowerCase())||
@@ -153,8 +169,8 @@ const isValidFilter= async ()=>{
       }
   }
 }
-const filterCustomers= async ()=>{
-  const data= await customers.value
+const filterCustomers= ()=>{
+  const data= listToDisplay
   console.log(data)
   if (isValidFilter){
       return data.filter((item)=>{
@@ -164,7 +180,7 @@ const filterCustomers= async ()=>{
           item.phone.toLowerCase().includes(filterByText.value.toLowerCase())
   })
   }else{
-      return customers.value
+      return data
   }
 }
 
@@ -202,7 +218,7 @@ switch (product.inventoryStatus) {
 
 </script>
 <style scoped>
-.p-dataview .p-dataview-header {
+/* .p-dataview .p-dataview-header {
   background: #f9fafb;
   color: #374151;
   border: 1px solid #e5e7eb;
@@ -210,5 +226,7 @@ switch (product.inventoryStatus) {
   padding: 0rem 0rem;
   font-weight: 700;
   margin-bottom: 1em;
-}
+} */
+
+
 </style>

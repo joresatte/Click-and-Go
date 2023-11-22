@@ -1,6 +1,5 @@
 <template>
   <div class=" page-label"><h1 >{{label}}</h1></div>
- 
   <div v-if="showModal">
     <loginEmployee 
     :login="loginUser"

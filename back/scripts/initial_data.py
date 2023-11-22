@@ -49,7 +49,7 @@ cliente_1= cl(
 
 cliente_5= cl(
     id='5',
-    cliente="Darn Chambers",
+    cliente="Chambers Darn ",
     dni="0268-0535",
     address="4752 Hoffman Drive",
     phone="394 937 5775",
@@ -90,7 +90,7 @@ cliente_5= cl(
 
 cliente_2= cl(
     id='2',
-    cliente="Darn Chambers",
+    cliente="Darn ivan",
     dni="0268-0232",
     address="4752 Hoffman Drive",
     phone="394 937 2775",
@@ -131,7 +131,7 @@ cliente_2= cl(
 
 cliente_3= cl(
     id='3',
-    cliente="Darn Chambers",
+    cliente="Ivan west",
     dni="0268-0333",
     address="4752 Hoffman Drive",
     phone="394 937 3775",
@@ -172,7 +172,7 @@ cliente_3= cl(
 
 cliente_4= cl(
     id='4',
-    cliente="Darn Chambers",
+    cliente="kaert noise",
     dni="0268-0434",
     address="4752 Hoffman Drive",
     phone="394 937 4775",
@@ -254,7 +254,7 @@ cliente_6= cl(
 
 cliente_7= cl(
     id='7',
-    cliente="Darn Chambers",
+    cliente="ken John",
     dni="0268-0737",
     address="4752 Hoffman Drive",
     phone="394 937 7775",
