@@ -80,7 +80,6 @@
               </template>
       </DataView>
   </div>
-  <RouterView />
 </template>
 
 

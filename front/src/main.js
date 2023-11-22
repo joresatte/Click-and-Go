@@ -29,12 +29,23 @@ import Password from 'primevue/password';
 import Tag from 'primevue/tag';
 import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'   // optional
 
+// // Vuetify
+// import 'vuetify/styles'
+// import { createVuetify } from 'vuetify'
+// import * as components from 'vuetify/components'
+// import * as directives from 'vuetify/directives'
+
+// const vuetify = createVuetify({
+//   components,
+//   directives,
+// })
 
 const app= createApp(App);
 app.use(ToastService);
 app.use(PrimeVue)
 app.use(router)
 app.directive('tooltip', Tooltip);
+// app.use(vuetify)
 
 app.component('DataView', DataView)
 app.component('Tag', Tag)
