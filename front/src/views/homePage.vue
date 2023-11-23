@@ -6,10 +6,11 @@
       <DataView :value="customers" :layout="layout" :sortOrder="sortOrder" :sortField="sortField">
             <template #header>
                 <div class="overflow-hidden">
+                    <div class="flex justify-content-start font-bold border-round" style="margin-bottom: 1em;">
+                        <Dropdown v-model="sortKey"
+                            :options="sortOptions" optionLabel="label" placeholder="Filtrar" @change="onSortChange($event)" />
+                    </div>
                     <div class="flex">
-                        <Dropdown v-model="sortKey" 
-                          class="flex justify-content-start font-bold border-round"
-                          :options="sortOptions" optionLabel="label" placeholder="Filtrar" @change="onSortChange($event)" />
                             <span class="ml-1 p-input-icon-left ">
                                 <i class="pi pi-search " style="color: blue;"/>
                                 <InputText 
