@@ -13,7 +13,7 @@
                           <span class="ml-1 p-input-icon-left ">
                               <i class="pi pi-search " style="color: blue;"/>
                               <InputText 
-                              type="text" v-model="filterByText" 
+                              type="text" v-model="filteredText" 
                               placeholder="Buscar" 
                               style="width: 8em; color: blue;"/>
                           </span>
@@ -22,7 +22,7 @@
                   </div>
               </div>
           </template>
-              <template #list="" v-for="index in listToDisplay" :key="index.id">
+              <template #list="" v-for="index in filterCustomers" :key="index.id">
                   <div class="col-12" >
                       <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4" >
                           <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
@@ -49,7 +49,7 @@
                       </div>
                   </div>
               </template>
-              <template #grid="" v-for="index in listToDisplay" :key="index.id">
+              <template #grid="" v-for="index in filterCustomers" :key="index.id">
                   <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" >
                       <div class="p-4 border-1 surface-border surface-card border-round" >
                           <div class="flex flex-wrap align-items-center justify-content-between gap-2">
@@ -83,17 +83,16 @@
   </div>
 </template>
 
-
 <script setup>
 import config from "@/config.js";
 import { ref, onMounted, computed, reactive} from "vue";
 import { useRouter } from 'vue-router'
 
 onMounted(() => {
-loadData()
+    loadData()
 });
 
-const filterByText= ref()
+const filteredText= ref()
 const sortKey = ref();
 const sortOrder = ref();
 const sortField = ref();
@@ -103,7 +102,6 @@ const sortOptions = ref([
 ]);
 const customers = ref([]);
 const layout = ref('grid');
-const error= ref(null)
 let loading= ref(false)
 const router = useRouter()
 const load= ref('Loading...')
@@ -118,11 +116,6 @@ const loadData= async ()=>{
     {customers.value= await response.json() 
         showLoad.value= false
         showDataView.value= true
-    console.table(customers.value)
-    for(const item of customers.value){
-        listToDisplay.push(item)
-        console.table('listToDisplay',listToDisplay)
-    }
     }
     else{
         showLoad.value= true
@@ -146,43 +139,18 @@ async function onclicked(e){
                       // But print any other errors to the console
                       console.error(err);
                       }
-                  })
+                })
       
   }
   
 }
 
-computed(()=>{
-  filterCustomers
-  console.Console(filterCustomers)
+const filterCustomers= computed(()=>{
+    console.table(customers.value)
+    return filteredText.value
+        ? customers.value.filter(til => til.tags.includes(filteredText.value))
+        : customers.value;
 })
-
-const isValidFilter= ()=>{
-  for (const item of listToDisplay){
-      if (
-          item.cliente.toLowerCase().includes(filterByText.value.toLowerCase())||
-          item.dni.toLowerCase().includes(filterByText.value.toLowerCase())||
-          item.address.toLowerCase().includes(filterByText.value.toLowerCase())||
-          item.phone.toLowerCase().includes(filterByText.value.toLowerCase())
-      ){
-          return true
-      }
-  }
-}
-const filterCustomers= ()=>{
-  const data= listToDisplay
-  console.log(data)
-  if (isValidFilter){
-      return data.filter((item)=>{
-          item.cliente.toLowerCase().includes(filterByText.value.toLowerCase())||
-          item.dni.toLowerCase().includes(filterByText.value.toLowerCase())||
-          item.address.toLowerCase().includes(filterByText.value.toLowerCase())||
-          item.phone.toLowerCase().includes(filterByText.value.toLowerCase())
-  })
-  }else{
-      return data
-  }
-}
 
 const onSortChange = (event) => {
   const value = event.value.value;
@@ -218,7 +186,7 @@ switch (product.inventoryStatus) {
 
 </script>
 <style scoped>
-/* .p-dataview .p-dataview-header {
+.p-dataview .p-dataview-header {
   background: #f9fafb;
   color: #374151;
   border: 1px solid #e5e7eb;
@@ -226,7 +194,7 @@ switch (product.inventoryStatus) {
   padding: 0rem 0rem;
   font-weight: 700;
   margin-bottom: 1em;
-} */
+}
 
 
 </style>
