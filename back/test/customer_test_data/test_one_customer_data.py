@@ -11,10 +11,12 @@ def test_get_one_customer_data():
 
     first_cliente= Customer_data(
         id='1',
+        picture="picture",
         cliente="Darn Chambers",
         dni="0268-0131",
         address="4752 Hoffman Drive",
         phone="394 937 1775",
+        status="Entergado",
         delivery_note= {
             'id':'12',
             'note':"Construction Expeditor",
@@ -55,13 +57,15 @@ def test_get_one_customer_data():
     
     if response== 200:
         assert True, 'Succeed'
-    assert len(response.json)== 10
+    assert len(response.json)== 12
     assert response.json=={
         'id':'1',
+        "picture":"picture",
         'cliente':"Darn Chambers",
         'dni':"0268-0131",
         'address':"4752 Hoffman Drive",
         'phone':"394 937 1775",
+        "status":"Entergado",
         'delivery_note': {
             'id':'12',
             'note':"Construction Expeditor",

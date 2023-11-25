@@ -4,14 +4,17 @@ from sys import path
 sys.path.insert(0, "")
 from src.domain.customer_data import Customer_dataRepository as repo_cl, Customer_data as cl
 from src.domain.employee import Employee_Repository as repo, Employee as u
+from src.domain.img import picture
 database_path = "data/database.db"
 
 cliente_1= cl(
     id='1',
+    picture= picture,
     cliente="Darn Chambers",
     dni="0268-0131",
     address="4752 Hoffman Drive",
     phone="394 937 1775",
+    status= "Entregado",
     delivery_note= {
         'id':'12',
         'note':"Construction Expeditor",
@@ -49,10 +52,12 @@ cliente_1= cl(
 
 cliente_5= cl(
     id='5',
+    picture= picture,
     cliente="Chambers Darn ",
     dni="0268-0535",
     address="4752 Hoffman Drive",
     phone="394 937 5775",
+    status= "No entregado",
     delivery_note= {
         'id':'52',
         'note':"Construction Expeditor",
@@ -90,10 +95,12 @@ cliente_5= cl(
 
 cliente_2= cl(
     id='2',
+    picture= picture,
     cliente="Darn ivan",
     dni="0268-0232",
     address="4752 Hoffman Drive",
     phone="394 937 2775",
+    status= "Entregado",
     delivery_note= {
         'id':'22',
         'note':"Construction Expeditor",
@@ -131,10 +138,12 @@ cliente_2= cl(
 
 cliente_3= cl(
     id='3',
+    picture= picture,
     cliente="Ivan west",
     dni="0268-0333",
     address="4752 Hoffman Drive",
     phone="394 937 3775",
+    status= "No entregado",
     delivery_note= {
         'id':'32',
         'note':"Construction Expeditor",
@@ -172,10 +181,12 @@ cliente_3= cl(
 
 cliente_4= cl(
     id='4',
+    picture= picture,
     cliente="kaert noise",
     dni="0268-0434",
     address="4752 Hoffman Drive",
     phone="394 937 4775",
+    status= "Entregado",
     delivery_note= {
         'id':'42',
         'note':"Construction Expeditor",
@@ -213,10 +224,12 @@ cliente_4= cl(
 
 cliente_6= cl(
     id='6',
+    picture= picture,
     cliente="Darn Chambers",
     dni="0268-0636",
     address="4752 Hoffman Drive",
     phone="394 937 6775",
+    status= "No entregado",
     delivery_note= {
         'id':'62',
         'note':"Construction Expeditor",
@@ -254,10 +267,12 @@ cliente_6= cl(
 
 cliente_7= cl(
     id='7',
+    picture= picture,
     cliente="ken John",
     dni="0268-0737",
     address="4752 Hoffman Drive",
     phone="394 937 7775",
+    status= "Entregado",
     delivery_note= {
         'id':'72',
         'note':"Construction Expeditor",

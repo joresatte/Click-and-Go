@@ -9,10 +9,12 @@ def test_get_customers_data():
     
     first_cliente= Customer_data(
         id=1,
+        picture="picture",
         cliente="Darn Chambers",
         dni="0268-0131",
         address="4752 Hoffman Drive",
         phone="394 937 1775",
+        status="Entergado",
         delivery_note= {
             'id':'12',
             'note':"Construction Expeditor",
@@ -49,10 +51,12 @@ def test_get_customers_data():
     )
     second_cliente= Customer_data(
         id=2,
+        picture="picture",
         cliente="Townsend Moakson",
         dni="49999-608",
         address="9 Victoria Junction",
         phone="436 246 3857",
+        status="No entergado",
         delivery_note= {
             'id':'12',
             'note':"Construction Expeditor",
@@ -96,10 +100,12 @@ def test_get_customers_data():
         assert False, 'fail assertion'
     assert response.json ==[
             {"id":"1",
+            "picture":"picture",
             "cliente":"Darn Chambers",
             "dni":"0268-0131",
             "address":"4752 Hoffman Drive",
             "phone":"394 937 1775",
+            "status":"Entergado",
             'delivery_note': {
                 'id':'12',
                 'note':"Construction Expeditor",
@@ -135,10 +141,12 @@ def test_get_customers_data():
             }
         },
             {"id":"2",
+            "picture":"picture",
             "cliente":"Townsend Moakson",
             "dni":"49999-608",
             "address":"9 Victoria Junction",
             "phone":"436 246 3857",
+            "status":"No entergado",
             'delivery_note': {
                 'id':'12',
                 'note':"Construction Expeditor",

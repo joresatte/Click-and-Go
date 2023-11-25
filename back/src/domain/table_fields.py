@@ -6,8 +6,8 @@
 # @modified date:
 
 
-customer_table_fields= [ 'id', 'cliente', 'dni', 
-                         'address', 'phone', 'delivery_note',
+customer_table_fields= [ 'id', 'picture','cliente', 'dni', 
+                         'address', 'phone', 'status','delivery_note',
                          'order_data', 'orders_packages', 'receptor_data', 'returned_product']
 
 orders_packages_table_fields= ['id', 'drawers', 'bags', 

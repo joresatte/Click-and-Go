@@ -19,15 +19,17 @@ import json
 class Customer_data:
 
     def __init__(self,
-                 id, cliente, dni,
-                 address, phone, delivery_note, 
+                id, picture, cliente, dni,
+                address, phone, status, delivery_note, 
                 order_data, orders_packages, 
                 receptor_data, returned_product):
         self.id= id
+        self.picture= picture
         self.dni= dni
         self.cliente= cliente
         self.address= address
         self.phone= phone
+        self.status= status
         self.delivery_note= delivery_note 
         self.order_data= order_data 
         self.orders_packages= orders_packages 
@@ -38,10 +40,12 @@ class Customer_data:
     def to_dict(self):
         return {
             "id": self.id,
+            "picture": self.picture,
             "dni": self.dni,
             "cliente": self.cliente,
             "address": self.address,
             "phone": self.phone,
+            "status": self.status,
             "delivery_note": self.delivery_note,
             "order_data": self.order_data,
             "orders_packages": self.orders_packages,
@@ -82,10 +86,12 @@ class Customer_dataRepository:
         data = cursor.fetchall()
         customers_data_list.extend([Customer_data(
             id=item['id'],
+            picture=item['picture'],
             cliente=item['cliente'],
             dni=item['dni'],
             address=item['address'],
             phone=item['phone'],
+            status=item['status'],
             delivery_note= json.loads(item['delivery_note']),
             order_data= json.loads(item['order_data']),
             orders_packages= json.loads(item['orders_packages']),
@@ -103,10 +109,12 @@ class Customer_dataRepository:
 
         customer = Customer_data(
             id=data['id'],
+            picture=data['picture'],
             cliente=data['cliente'],
             dni=data['dni'],
             address=data['address'],
             phone=data['phone'],
+            status=data['status'],
             delivery_note= json.loads(data['delivery_note']),
             order_data= json.loads(data['order_data']),
             orders_packages= json.loads(data['orders_packages']),
@@ -178,10 +186,12 @@ class Customer_dataRepository:
         cursor.execute(
             sql,
             {"id": request.id,
+             "picture": request.picture,
              "dni": request.dni,
              "cliente": request.cliente,
              "address": request.address,
              "phone": request.phone,
+             "status": request.status,
              "delivery_note": json.dumps(request.delivery_note),
              "order_data": json.dumps(request.order_data),
              "orders_packages": json.dumps(request.orders_packages),
