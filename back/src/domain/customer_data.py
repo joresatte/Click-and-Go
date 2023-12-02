@@ -27,6 +27,7 @@ class Customer_data:
         self.picture= picture
         self.dni= dni
         self.cliente= cliente
+        self.dni= dni
         self.address= address
         self.phone= phone
         self.status= status

@@ -25,20 +25,20 @@ cliente_1= cl(
         'delivery_time':"12:00",
         'order_number':'85',
         'delivery_time_interval':"12:00 - 12:30 ",
-        'customer_id': '1'
+        'customer_id': '1',
     },
     orders_packages= {
         'id':'3',
+        'substitutions': "No",
+        'customer_id':'1', 
         'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
         'bags':{"cold":'2', "frozen":'1'},
-        'substitutions': "No",
-        'customer_id':'1' 
     },
     receptor_data= {
         'id':'6',
         'name':"Wallas Mulhall",
         'DNI':"0899397964",
-        'customer_id':'1'
+        'customer_id':'1',
     },
     returned_product= {
         'id':'2',
@@ -46,8 +46,8 @@ cliente_1= cl(
         'unity':'2',
         'return_reason':"",
         'order_number':"",
-        'customer_id':'1'
-    }
+        'customer_id':'1',
+    },
 )
 
 cliente_5= cl(
@@ -68,20 +68,20 @@ cliente_5= cl(
         'delivery_time':"52:00",
         'order_number':'85',
         'delivery_time_interval':"52:00 - 52:30 ",
-        'customer_id': '5'
+        'customer_id': '5',
     },
     orders_packages= {
         'id':'3',
+        'substitutions': "No",
+        'customer_id':'5', 
         'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
         'bags':{"cold":'2', "frozen":'5'},
-        'substitutions': "No",
-        'customer_id':'5' 
     },
     receptor_data= {
         'id':'6',
         'name':"Wallas Mulhall",
         'DNI':"0899397964",
-        'customer_id':'5'
+        'customer_id':'5',
     },
     returned_product= {
         'id':'2',
@@ -89,8 +89,8 @@ cliente_5= cl(
         'unity':'2',
         'return_reason':"",
         'order_number':"",
-        'customer_id':'5'
-    }
+        'customer_id':'5',
+    },
 )
 
 cliente_2= cl(
@@ -111,20 +111,20 @@ cliente_2= cl(
         'delivery_time':"22:00",
         'order_number':'85',
         'delivery_time_interval':"22:00 - 22:30 ",
-        'customer_id': '2'
+        'customer_id': '2',
     },
     orders_packages= {
         'id':'3',
+        'substitutions': "No",
+        'customer_id':'2', 
         'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
         'bags':{"cold":'2', "frozen":'2'},
-        'substitutions': "No",
-        'customer_id':'2' 
     },
     receptor_data= {
         'id':'6',
         'name':"Wallas Mulhall",
         'DNI':"0899397964",
-        'customer_id':'2'
+        'customer_id':'2',
     },
     returned_product= {
         'id':'2',
@@ -132,8 +132,8 @@ cliente_2= cl(
         'unity':'2',
         'return_reason':"",
         'order_number':"",
-        'customer_id':'2'
-    }
+        'customer_id':'2',
+    },
 )
 
 cliente_3= cl(
@@ -154,20 +154,20 @@ cliente_3= cl(
         'delivery_time':"32:00",
         'order_number':'85',
         'delivery_time_interval':"32:00 - 32:30 ",
-        'customer_id': '3'
+        'customer_id': '3',
     },
     orders_packages= {
         'id':'3',
+        'substitutions': "No",
+        'customer_id':'3', 
         'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
         'bags':{"cold":'2', "frozen":'3'},
-        'substitutions': "No",
-        'customer_id':'3' 
     },
     receptor_data= {
         'id':'6',
         'name':"Wallas Mulhall",
         'DNI':"0899397964",
-        'customer_id':'3'
+        'customer_id':'3',
     },
     returned_product= {
         'id':'2',
@@ -175,8 +175,8 @@ cliente_3= cl(
         'unity':'2',
         'return_reason':"",
         'order_number':"",
-        'customer_id':'3'
-    }
+        'customer_id':'3',
+    },
 )
 
 cliente_4= cl(
@@ -197,20 +197,20 @@ cliente_4= cl(
         'delivery_time':"42:00",
         'order_number':'85',
         'delivery_time_interval':"42:00 - 42:30 ",
-        'customer_id': '4'
+        'customer_id': '4',
     },
     orders_packages= {
         'id':'3',
+        'substitutions': "No",
+        'customer_id':'4', 
         'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
         'bags':{"cold":'2', "frozen":'4'},
-        'substitutions': "No",
-        'customer_id':'4' 
     },
     receptor_data= {
         'id':'6',
         'name':"Wallas Mulhall",
         'DNI':"0899397964",
-        'customer_id':'4'
+        'customer_id':'4',
     },
     returned_product= {
         'id':'2',
@@ -218,8 +218,8 @@ cliente_4= cl(
         'unity':'2',
         'return_reason':"",
         'order_number':"",
-        'customer_id':'4'
-    }
+        'customer_id':'4',
+    },
 )
 
 cliente_6= cl(
@@ -240,20 +240,20 @@ cliente_6= cl(
         'delivery_time':"62:00",
         'order_number':'85',
         'delivery_time_interval':"62:00 - 62:30 ",
-        'customer_id': '6'
+        'customer_id': '6',
     },
     orders_packages= {
         'id':'3',
+        'substitutions': "No",
+        'customer_id':'6',
         'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
         'bags':{"cold":'2', "frozen":'6'},
-        'substitutions': "No",
-        'customer_id':'6' 
     },
     receptor_data= {
         'id':'6',
         'name':"Wallas Mulhall",
         'DNI':"0899397964",
-        'customer_id':'6'
+        'customer_id':'6',
     },
     returned_product= {
         'id':'2',
@@ -261,8 +261,8 @@ cliente_6= cl(
         'unity':'2',
         'return_reason':"",
         'order_number':"",
-        'customer_id':'6'
-    }
+        'customer_id':'6',
+    },
 )
 
 cliente_7= cl(
@@ -283,20 +283,20 @@ cliente_7= cl(
         'delivery_time':"72:00",
         'order_number':'85',
         'delivery_time_interval':"72:00 - 72:30 ",
-        'customer_id': '7'
+        'customer_id': '7',
     },
     orders_packages= {
         'id':'3',
+        'substitutions': "No",
+        'customer_id':'7', 
         'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
         'bags':{"cold":'2', "frozen":'7'},
-        'substitutions': "No",
-        'customer_id':'7' 
     },
     receptor_data= {
         'id':'6',
         'name':"Wallas Mulhall",
         'DNI':"0899397964",
-        'customer_id':'7'
+        'customer_id':'7',
     },
     returned_product= {
         'id':'2',
@@ -304,15 +304,18 @@ cliente_7= cl(
         'unity':'2',
         'return_reason':"",
         'order_number':"",
-        'customer_id':'7'
-    }
+        'customer_id':'7',
+    },
 )
+path_repo= repo_cl(database_path)
+path_repo.save_customer(cliente_1)
+path_repo.save_customer(cliente_2)
+path_repo.save_customer(cliente_3)
+path_repo.save_customer(cliente_4)
+path_repo.save_customer(cliente_5)
+path_repo.save_customer(cliente_6)
+path_repo.save_customer(cliente_7)
 
-def save_cliente_initial_data(clientes):
-    path_repo= repo_cl(database_path)
-    for cliente in clientes:
-        path_repo.save_customer(cliente)
-    return 'Saved successfully'
 def save_employee_initial_data(employees):
     path_repo= repo(database_path)
     for employee in employees:
@@ -331,7 +334,5 @@ employee_2= u(
 )
 
 if __name__ == '__main__':
-    cliente_list= [cliente_1, cliente_2, cliente_3, cliente_4, cliente_5, cliente_6, cliente_7]
     employee_list= [employee_1, employee_2]
-    save_cliente_initial_data(cliente_list)
     save_employee_initial_data(employee_list)

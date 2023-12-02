@@ -21,7 +21,7 @@ import { useRouter } from 'vue-router'
 
 const toast = useToast();
 const router = useRouter()
-const label= ref('Eroski')
+const label= ref('test')
 const error= ref(null)
 const alert= ref(false)
 const data= ref(null)
@@ -35,8 +35,8 @@ onMounted(() => {
      if(localStorage.getItem('dataIdentity')!== undefined && localStorage.getItem('dataIdentity') ){
       showModal.value= false
       router.push({
-          path: '/home page',
-          name: 'home page',
+          path: '/home',
+          name: 'home',
         })
      }else{
        return
@@ -70,8 +70,8 @@ async function onclicked(){
         localStorage.setItem('dataIdentity', JSON.stringify(data.value))
         showModal.value= false
         router.push({
-          path: '/home page',
-          name: 'home page',
+          path: '/home',
+          name: 'home',
         })
       }
       if(!requestStatusCode== true){

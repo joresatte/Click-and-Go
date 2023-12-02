@@ -1,3 +1,4 @@
+import json
 import tempfile
 from flask import jsonify
 
@@ -12,3 +13,6 @@ def object_to_json(data):
 
 def temp_file():
     return tempfile.NamedTemporaryFile().name
+
+def obj_dict(obj):
+    return obj.__dict__

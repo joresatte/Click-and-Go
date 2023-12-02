@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import PrimeVue from 'primevue/config';
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 import Button from 'primevue/button';
 
@@ -46,7 +48,7 @@ app.use(PrimeVue)
 app.use(router)
 app.directive('tooltip', Tooltip);
 // app.use(vuetify)
-
+app.use(VueAxios, axios)
 app.component('DataView', DataView)
 app.component('Tag', Tag)
 app.component('Button', Button)
