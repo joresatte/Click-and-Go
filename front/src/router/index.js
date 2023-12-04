@@ -11,6 +11,7 @@ const router = createRouter({
     {
       path: `/client/:id`,
       name: 'customerDetails',
+      props: true,
       component: () => import('../views/customerDetails.vue')
     }
   ]

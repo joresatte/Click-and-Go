@@ -1,115 +1,117 @@
 <template>
-    <div class="flex justify-content-start font-bold border-round">
-        <div class="flex justify-content-start font-bold border-round" style="margin-bottom: 1em;">
-            <Dropdown v-model="selected"
-                :options="options" optionLabel="text" placeholder="Filtrar" @change="onSortChange(selected.value)" />
+    <div v-if="showTemplate">
+        <div class="flex justify-content-start font-bold border-round">
+            <div class="flex justify-content-start font-bold border-round" style="margin-bottom: 1em;">
+                <Dropdown v-model="selected"
+                    :options="options" optionLabel="text" placeholder="Filtrar" @change="onSortChange(selected.value)" />
+            </div>
         </div>
-    </div>
-    <!-- <div>
-        <div style="margin-bottom: 0.5em;">
-            <select v-model="selected" style="height: 3em; padding: 0.5em; border-radius: 0.5em; ">
-                <option value="">filter</option>
-                <option v-for="option in options" :value="option.value">
-                    {{ option.text }}
-                </option>
-            </select>
+        <!-- <div>
+            <div style="margin-bottom: 0.5em;">
+                <select v-model="selected" style="height: 3em; padding: 0.5em; border-radius: 0.5em; ">
+                    <option value="">filter</option>
+                    <option v-for="option in options" :value="option.value">
+                        {{ option.text }}
+                    </option>
+                </select>
+            </div>
+        </div> -->
+        <div class="flex justify-content-between flex-wrap"  style="background-color: gray; padding: 1em; border-radius: 0.5em;">
+            <div class="flex justify-content-start">
+                <span class="ml-1 p-input-icon-left ">
+                    <i class="pi pi-search " style="color: blue;"/>
+                    <InputText
+                    type="text" v-model="filteredText"
+                    placeholder="Buscar"
+                    style="width: 8em; color: blue;"/>
+                </span>
+            </div>
+            <div class="flex justify-content-end">
+                <Button @click="activeShowList" ><i class="pi pi-bars" style="color: white;" ></i></Button>
+                <Button @click="activeShowGrid" v-if="showGridBtn"><i class="pi pi-th-large" style="color: white;" ></i></Button>
+            </div>
         </div>
-    </div> -->
-    <div class="flex justify-content-between flex-wrap"  style="background-color: gray; padding: 1em; border-radius: 0.5em;">
-        <div class="flex justify-content-start">
-            <span class="ml-1 p-input-icon-left ">
-                <i class="pi pi-search " style="color: blue;"/>
-                <InputText 
-                type="text" v-model="filteredText" 
-                placeholder="Buscar" 
-                style="width: 8em; color: blue;"/>
-            </span>
+            <div class="block bg-primary font-bold text-center p-4 border-round mb-3" style="margin-top: 10%;" v-if="showLoad">
+            <div class="showLoad">{{ load }}</div>
         </div>
-        <div class="flex justify-content-end">
-            <Button @click="activeShowList" ><i class="pi pi-bars" style="color: white;" ></i></Button>
-            <Button @click="activeShowGrid" ><i class="pi pi-th-large" style="color: white;" ></i></Button>
-        </div>
-    </div>
-	<div class="block bg-primary font-bold text-center p-4 border-round mb-3" style="margin-top: 10%;" v-if="showLoad">
-        <div class="showLoad">{{ load }}</div>
-    </div>
-    <div class="list" v-show="showList">
-        <div class="col-12" v-for="(item, index) in filteredData" :key="index">
-            <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4" :class="{ 'border-top-1 surface-border': index !== 0 }" 
-            v-if="!filteredText=='' && 
-                        item.cliente.toLowerCase().includes(filteredText.toLowerCase())||
-                        item.address.toLowerCase().includes(filteredText.toLowerCase())||
-                        item.phone.toLowerCase().includes(filteredText.toLowerCase())||
-                        item.dni.toLowerCase().includes(filteredText.toLowerCase())||
-                        item.status.toLowerCase().includes(filteredText.toLowerCase())? true: false">
-                <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
-                    <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-                        <img class="w-4 sm:w-5rem xl:w-2rem shadow-2 block xl:block mx-auto border-round" :src="item.picture" alt="image client" />
-                        <div class="text-2xl font-bold text-900">{{ item.cliente }}</div>
-                        <span class="font-semibold">{{ item.address }}</span>
-                        <span class="font-semibold">{{ item.dni}}</span>
-                        <div class="flex align-items-center gap-3">
-                            <span class="flex align-items-center gap-2">
-                                <i class="pi pi-tag"></i>
-                            </span>
+        <div class="list" v-show="showList">
+            <div class="col-12" v-for="(item, index) in filteredData" :key="index">
+                <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4" :class="{ 'border-top-1 surface-border': index !== 0 }"
+                v-if="!filteredText=='' &&
+                            item.cliente.toLowerCase().includes(filteredText.toLowerCase())||
+                            item.address.toLowerCase().includes(filteredText.toLowerCase())||
+                            item.phone.toLowerCase().includes(filteredText.toLowerCase())||
+                            item.dni.toLowerCase().includes(filteredText.toLowerCase())||
+                            item.status.toLowerCase().includes(filteredText.toLowerCase())? true: false">
+                    <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                        <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                            <img class="w-4 sm:w-5rem xl:w-2rem shadow-2 block xl:block mx-auto border-round" :src="item.picture" alt="image client" />
+                            <div class="text-2xl font-bold text-900">{{ item.cliente }}</div>
+                            <span class="font-semibold">{{ item.address }}</span>
+                            <span class="font-semibold">{{ item.dni}}</span>
+                            <div class="flex align-items-center gap-3">
+                                <span class="flex align-items-center gap-2">
+                                    <i class="pi pi-tag"></i>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                        <span class="text-2xl font-semibold">{{ item.phone}}</span>
-                        <Tag :value="item.status" :severity="getSeverity(item)"></Tag>
-                        <Button icon="pi pi-eye"
-                            label="ver"
-                            :loading="loading"
-                            @click="onclicked(item.id)"/>
+                        <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+                            <span class="text-2xl font-semibold">{{ item.phone}}</span>
+                            <Tag :value="item.status" :severity="getSeverity(item)"></Tag>
+                            <Button icon="pi pi-eye"
+                                label="ver"
+                                :loading="loading"
+                                @click="onclicked(item.id)"/>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="grid" v-show="showGrid" >
-        <div class="grid grid-nogutter" >
-            <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" v-for="(item, index) in filteredData" :key="index">
-                <div class="p-4 border-1 surface-border surface-card border-round" 
-                v-if="!filteredText=='' && 
-                        item.cliente.toLowerCase().includes(filteredText.toLowerCase())||
-                        item.address.toLowerCase().includes(filteredText.toLowerCase())||
-                        item.phone.toLowerCase().includes(filteredText.toLowerCase())||
-                        item.dni.toLowerCase().includes(filteredText.toLowerCase())||
-                        item.status.toLowerCase().includes(filteredText.toLowerCase())? true: false" 
+        <div class="grid" v-show="showGrid" >
+            <div class="grid grid-nogutter" >
+                <div class="col-12 sm:col-6 lg:col-12 xl:col-4 p-2" v-for="(item, index) in filteredData" :key="index">
+                    <div class="p-4 border-1 surface-border surface-card border-round"
+                    v-if="!filteredText=='' &&
+                            item.cliente.toLowerCase().includes(filteredText.toLowerCase())||
+                            item.address.toLowerCase().includes(filteredText.toLowerCase())||
+                            item.phone.toLowerCase().includes(filteredText.toLowerCase())||
+                            item.dni.toLowerCase().includes(filteredText.toLowerCase())||
+                            item.status.toLowerCase().includes(filteredText.toLowerCase())? true: false"
+                            >
+                        <div class="flex flex-wrap align-items-center justify-content-between gap-2">
+                        </div>
+                        <div class="flex flex-column align-items-center gap-3 py-5">
+                        <img class="w-4 sm:w-5rem xl:w-2rem shadow-2 block xl:block mx-auto border-round" :src="item.picture" alt="image client"
+                        />
+                        <div class="text-2xl font-bold"
+                        >{{ item.cliente}}</div>
+                        <span class="font-semibold"
+                        >{{ item.address }}</span>
+                        <div class="flex align-items-center gap-2"
                         >
-                    <div class="flex flex-wrap align-items-center justify-content-between gap-2">
-                    </div>
-                    <div class="flex flex-column align-items-center gap-3 py-5">
-                    <img class="w-4 sm:w-5rem xl:w-2rem shadow-2 block xl:block mx-auto border-round" :src="item.picture" alt="image client" 
-                    />
-                    <div class="text-2xl font-bold"
-                    >{{ item.cliente}}</div>
-                    <span class="font-semibold"
-                    >{{ item.address }}</span>
-                    <div class="flex align-items-center gap-2"
-                    >
-                        <span class="text-2xl font-semibold">{{ item.phone}}</span>
-                    </div>
-                    <div class="flex align-items-center justify-content-between"
-                    >
-                        <span class="font-semibold">{{ item.dni }} </span>
-                        <span
+                            <span class="text-2xl font-semibold">{{ item.phone}}</span>
+                        </div>
+                        <div class="flex align-items-center justify-content-between"
                         >
-                            <i class="pi pi-tag"
-                            ></i>
-                        </span>
-                    </div>
-                    <div class="flex sm:flex-column align-items-center sm:align-items-start gap-3 sm:gap-2" 
-                    >
-                        <Tag :value="item.status" :severity="getSeverity(item)"></Tag>
-                    </div>
-                    <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2"
-                    >
-                        <Button icon="pi pi-eye"
-                                label="ver"
-                                :loading="loading"
-                                @click="onclicked(item.id)"/>
-                    </div>
+                            <span class="font-semibold">{{ item.dni }} </span>
+                            <span
+                            >
+                                <i class="pi pi-tag"
+                                ></i>
+                            </span>
+                        </div>
+                        <div class="flex sm:flex-column align-items-center sm:align-items-start gap-3 sm:gap-2"
+                        >
+                            <Tag :value="item.status" :severity="getSeverity(item)"></Tag>
+                        </div>
+                        <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2"
+                        >
+                            <Button icon="pi pi-eye"
+                                    label="ver"
+                                    :loading="loading"
+                                    @click="onclicked(item.id)"/>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,9 +123,12 @@
 import config from "@/config.js";
 import { ref, onMounted, computed, toValue, onBeforeUpdate} from "vue";
 import { useRouter } from 'vue-router'
+import getCurrentIdentity from '@/views/apiSrevives/getCurrentIdentity'
 
+const showTemplate= ref(false)
 const selectedData= ref()
 const showGrid= ref(true)
+const showGridBtn= ref(true)
 const showList= ref(false)
 const filteredText= ref('')
 const selected = ref();
@@ -142,6 +147,7 @@ const showLoad= ref(true)
 
 onMounted(() => {
     loadData()
+    showTemplate.value= getCurrentIdentity!= null ? true: false
 })
 const loadData= async ()=>{
     try {
@@ -150,9 +156,9 @@ const loadData= async ()=>{
         let res= await fetch(toValue(url), options);
         let resJson = await res.json();
         let isString= Object.prototype.toString.call(resJson) === "[object String]" ? true: false
-        console.log('isString', isString)   
+        console.log('isString', isString)  
         response.value= resJson
-        console.log(Object.keys(response.value))
+        console.log(response.value.length) 
     } catch (errors) {
         error.value= errors
     }finally{
@@ -163,12 +169,10 @@ const loadData= async ()=>{
 }
 
 const activeShowGrid=()=>{
-    console.log('showGrid')
     showList.value= false
     showGrid.value= true
 }
 const activeShowList=()=>{
-    console.log('showList')
     showGrid.value= false
     showList.value= true
 }
@@ -215,7 +219,6 @@ const filtered= (val, obj)=>{
             if (e.status== val) {
                 acc.push(e);
             }
-            console.log(acc)
             selectedData.value= acc
             return selectedData.value
             }, []);
@@ -226,18 +229,17 @@ const filtered= (val, obj)=>{
 }
 
 function onSortChange(e){
-    console.log(e)
     // localStorage.setItem('selectValue', e)
     selected.value=e
 }
 
 onBeforeUpdate(()=>{
-    console.log(filteredData)
+    console.log('before update data', filteredData.length) 
+    
 })
 
 let filteredData = computed(() => { 
     const val = selected.value
-    console.log(val)
     const obj= response.value
     return filtered(val, obj)
     

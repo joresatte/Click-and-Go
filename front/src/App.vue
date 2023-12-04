@@ -68,6 +68,9 @@ async function onclicked(){
         data.value= await response.json()
         console.log(data.value)
         localStorage.setItem('dataIdentity', JSON.stringify(data.value))
+        setTimeout(() => {
+          localStorage.removeItem('dataIdentity');
+        }, 120000);
         showModal.value= false
         router.push({
           path: '/home',
