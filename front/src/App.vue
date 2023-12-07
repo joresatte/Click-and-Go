@@ -1,96 +1,81 @@
-<template>
-  <div class=" page-label"><h1 >{{label}}</h1></div>
-  <div v-if="showModal">
-    <loginEmployee 
-    :login="loginUser"
-    @onChanged="onChanged"
-    @onclicked=" onclicked"
-    />
-  </div>
-  <RouterView />
-  <Toast />
-</template>
-
 <script setup>
-import {RouterView } from 'vue-router'
-import { ref, reactive, onMounted} from 'vue';
-import config from "@/config.js";
-import loginEmployee from './components/loginEmployee.vue';
-import { useToast } from "primevue/usetoast";
-import { useRouter } from 'vue-router'
-
-const toast = useToast();
-const router = useRouter()
-const label= ref('test')
-const error= ref(null)
-const alert= ref(false)
-const data= ref(null)
-const showModal= ref(true)
-const loginUser = reactive({
-  identification: '',
-  password: ''
-})
-onMounted(() => {
-  if(window.localStorage){
-     if(localStorage.getItem('dataIdentity')!== undefined && localStorage.getItem('dataIdentity') ){
-      showModal.value= false
-      router.push({
-          path: '/home',
-          name: 'home',
-        })
-     }else{
-       return
-     }
-  }
-});
-
-const onChanged=(e)=>{
-  loginUser.value= e
-}
-async function onclicked(){
-  console.log('Send button clicked')
-  const settings = reactive({
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-        identification: loginUser['identification'],
-        password: loginUser['password']
-    }),
-  })
-  if(loginUser['identification'] && loginUser['password'] != ''){
-      const response= await fetch(`${config.login_Path}/get_login/Authenticated`, settings)
-                              .catch((err) => (error.value = err))
-      const requestStatusCode = response.ok
-      console.log('request Status Code ', requestStatusCode)
-      if(requestStatusCode== true){
-        data.value= await response.json()
-        console.log(data.value)
-        localStorage.setItem('dataIdentity', JSON.stringify(data.value))
-        setTimeout(() => {
-          localStorage.removeItem('dataIdentity');
-        }, 120000);
-        showModal.value= false
-        router.push({
-          path: '/home',
-          name: 'home',
-        })
-      }
-      if(!requestStatusCode== true){
-        toast.add({ severity: 'error', summary: 'Error Message', detail: 'Failed to login', life: 4000 });
-      }
-  }else{
-    toast.add({ severity: 'error', summary: 'Error Message', detail: 'All fields are required', life: 3000 });
-  }
-}
+import { RouterLink, RouterView } from 'vue-router';
 </script>
 
+<template>
+  <header>
 
+    <div class="wrapper">
+
+      <nav>
+        <!-- <RouterLink to="/">Home</RouterLink> -->
+      </nav>
+    </div>
+  </header>
+
+  <RouterView />
+</template>
 
 <style scoped>
-.page-label{
+header {
+  line-height: 1.5;
+  max-height: 100vh;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+nav {
+  width: 100%;
+  font-size: 12px;
   text-align: center;
-  color: red;
+  margin-top: 2rem;
+}
+
+nav a.router-link-exact-active {
+  color: var(--color-text);
+}
+
+nav a.router-link-exact-active:hover {
+  background-color: transparent;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid var(--color-border);
+}
+
+nav a:first-of-type {
+  border: 0;
+}
+
+@media (min-width: 1024px) {
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  nav {
+    text-align: left;
+    margin-left: -1rem;
+    font-size: 1rem;
+
+    padding: 1rem 0;
+    margin-top: 1rem;
+  }
 }
 </style>

@@ -1,16 +1,14 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import PrimeVue from 'primevue/config';
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-
-import Button from 'primevue/button';
 
 import "primevue/resources/themes/lara-light-indigo/theme.css";
 import 'primevue/resources/primevue.min.css';                
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css'
+import Button from 'primevue/button';
 import DataView from 'primevue/dataview';
 import InputText from 'primevue/inputtext';
 import Toast from 'primevue/toast';
@@ -31,24 +29,12 @@ import Password from 'primevue/password';
 import Tag from 'primevue/tag';
 import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'   // optional
 
-// // Vuetify
-// import 'vuetify/styles'
-// import { createVuetify } from 'vuetify'
-// import * as components from 'vuetify/components'
-// import * as directives from 'vuetify/directives'
-
-// const vuetify = createVuetify({
-//   components,
-//   directives,
-// })
-
 const app= createApp(App);
+app.use(createPinia())
 app.use(ToastService);
 app.use(PrimeVue)
 app.use(router)
 app.directive('tooltip', Tooltip);
-// app.use(vuetify)
-app.use(VueAxios, axios)
 app.component('DataView', DataView)
 app.component('Tag', Tag)
 app.component('Button', Button)

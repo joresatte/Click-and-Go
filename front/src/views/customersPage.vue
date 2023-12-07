@@ -1,5 +1,8 @@
 <template>
-    <div v-if="showTemplate">
+    <div>
+        <AppLogo/>
+    </div>
+    <div class="customers">
         <div class="flex justify-content-start font-bold border-round">
             <div class="flex justify-content-start font-bold border-round" style="margin-bottom: 1em;">
                 <Dropdown v-model="selected"
@@ -122,16 +125,17 @@
 <script setup>
 import config from "@/config.js";
 import { ref, onMounted, computed, toValue, onBeforeUpdate} from "vue";
-import { useRouter } from 'vue-router'
-import getCurrentIdentity from '@/views/apiSrevives/getCurrentIdentity'
-
-const showTemplate= ref(false)
+import {usePiniaStore} from '@/stores/store'
+import AppLogo from "@/components/appLogo.vue";
+const piniaStore= usePiniaStore()
 const selectedData= ref()
 const showGrid= ref(true)
 const showGridBtn= ref(true)
 const showList= ref(false)
 const filteredText= ref('')
 const selected = ref();
+let currSeconds= ref(0)
+let timer= ref(null)
 const options = ref([
   {text: 'Entregado', value: 'Entregado'},
   {text: 'No entregado', value: 'No entregado'},
@@ -141,13 +145,19 @@ const fetching= ref(true)
 const error= ref()
 
 let loading= ref(false)
-const router = useRouter()
 const load= ref('Loading...')
 const showLoad= ref(true)
 
 onMounted(() => {
     loadData()
-    showTemplate.value= getCurrentIdentity!= null ? true: false
+    const redirection = piniaStore.getIdentity()== true ? piniaStore.router.push({
+        path: '/customersPage',
+        name: 'customersPage',
+    }): piniaStore.router.push({
+        path: '/loginPage',
+        name: 'loginPage',
+    })
+    console.log('customers Page')
 })
 const loadData= async ()=>{
     try {
@@ -157,8 +167,7 @@ const loadData= async ()=>{
         let resJson = await res.json();
         let isString= Object.prototype.toString.call(resJson) === "[object String]" ? true: false
         console.log('isString', isString)  
-        response.value= resJson
-        console.log(response.value.length) 
+        response.value= resJson 
     } catch (errors) {
         error.value= errors
     }finally{
@@ -211,6 +220,32 @@ const testJSON=(text)=> {
 //     return objList;
 //   }
 // }
+window.onload= resetTimer()
+window.onunload= resetTimer()
+function resetTimer(){
+    /* Clear the previous interval */ 
+    clearInterval(timer.value); 
+
+    /* Reset the seconds of the timer */ 
+    currSeconds.value = 0; 
+
+    /* Set a new interval */ 
+    timer.value = 
+        setInterval(startIdleTimer, 920000); 
+}
+
+function startIdleTimer(){
+    /* Increment the 
+        timer seconds */ 
+    currSeconds++;
+
+    /* clear  identity data 
+    after the page is loaded 
+    according to the currSeconds value*/ 
+    localStorage.clear('dataIdentity')
+    //console.log(removeIdentidy)
+}
+
 
 const filtered= (val, obj)=>{
     if(!val==''){
@@ -262,8 +297,8 @@ const getSeverity = (item) => {
 async function onclicked(e){
   console.log(e)
   localStorage.setItem('pathId', JSON.stringify(e))
-  if(router.path != `/client/${e}`){
-      await router.push({
+  if(piniaStore.router.path != `/client/${e}`){
+      await piniaStore.router.push({
               path: `/client/:id`,
               name: 'customerDetails',
               params:{id: e}
@@ -293,6 +328,11 @@ async function onclicked(e){
   font-weight: 700;
   margin-bottom: 1em;
 }
-
-
+@media (min-width: 1024px) {
+  .customers {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+}
 </style>
