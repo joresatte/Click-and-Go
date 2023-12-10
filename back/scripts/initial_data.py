@@ -31,7 +31,7 @@ cliente_1= cl(
         'id':'3',
         'substitutions': "No",
         'customer_id':'1', 
-        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
+        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out_of_drawers": '0'},
         'bags':{"cold":'2', "frozen":'1'},
     },
     receptor_data= {
@@ -74,7 +74,7 @@ cliente_5= cl(
         'id':'3',
         'substitutions': "No",
         'customer_id':'5', 
-        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
+        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out_of_drawers": '0'},
         'bags':{"cold":'2', "frozen":'5'},
     },
     receptor_data= {
@@ -117,7 +117,7 @@ cliente_2= cl(
         'id':'3',
         'substitutions': "No",
         'customer_id':'2', 
-        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
+        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out_of_drawers": '0'},
         'bags':{"cold":'2', "frozen":'2'},
     },
     receptor_data= {
@@ -160,7 +160,7 @@ cliente_3= cl(
         'id':'3',
         'substitutions': "No",
         'customer_id':'3', 
-        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
+        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out_of_drawers": '0'},
         'bags':{"cold":'2', "frozen":'3'},
     },
     receptor_data= {
@@ -203,7 +203,7 @@ cliente_4= cl(
         'id':'3',
         'substitutions': "No",
         'customer_id':'4', 
-        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
+        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out_of_drawers": '0'},
         'bags':{"cold":'2', "frozen":'4'},
     },
     receptor_data= {
@@ -246,7 +246,7 @@ cliente_6= cl(
         'id':'3',
         'substitutions': "No",
         'customer_id':'6',
-        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
+        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out_of_drawers": '0'},
         'bags':{"cold":'2', "frozen":'6'},
     },
     receptor_data= {
@@ -289,7 +289,7 @@ cliente_7= cl(
         'id':'3',
         'substitutions': "No",
         'customer_id':'7', 
-        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
+        'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out_of_drawers": '0'},
         'bags':{"cold":'2', "frozen":'7'},
     },
     receptor_data= {

@@ -163,11 +163,9 @@ const loadData= async ()=>{
     try {
         const url= `${config.login_Path}/all_customers`
         const options= {}
-        let res= await fetch(toValue(url), options);
-        let resJson = await res.json();
-        let isString= Object.prototype.toString.call(resJson) === "[object String]" ? true: false
-        console.log('isString', isString)  
-        response.value= resJson 
+        await piniaStore.getData(toValue(url), options)
+        response.value= await piniaStore.data
+        console.log(response.value)
     } catch (errors) {
         error.value= errors
     }finally{
@@ -296,8 +294,10 @@ const getSeverity = (item) => {
 
 async function onclicked(e){
   console.log(e)
-  localStorage.setItem('pathId', JSON.stringify(e))
   if(piniaStore.router.path != `/client/${e}`){
+      localStorage.setItem('pathId', JSON.stringify(e))
+      piniaStore.pathId= e
+      console.log(piniaStore.pathId)
       await piniaStore.router.push({
               path: `/client/:id`,
               name: 'customerDetails',

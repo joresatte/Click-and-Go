@@ -323,5 +323,11 @@ z-index: 5;
     4px 5px 6px rgba(242, 54, 220, 0.4);
 }
 }
-
+@media (min-width: 320px) {
+  .container {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+}
 </style>

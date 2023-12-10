@@ -7,6 +7,7 @@
       @onclicked=" onclicked"
       />
   </div>
+  <Toast />
 </template>
 <script setup>
 import loginEmployee from '@/components/loginEmployee.vue';
