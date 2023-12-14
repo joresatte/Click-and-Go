@@ -11,11 +11,10 @@ from src.domain.table_fields import returned_product_table_fields as returned_pr
 class Returned_product:
 
     def __init__(self, 
-                 id, description, 
+                 id,
                  unity, return_reason, 
                  order_number, customer_id):
         self.id= id
-        self.description= description
         self.unity= unity
         self.return_reason= return_reason
         self.order_number= order_number
@@ -24,7 +23,6 @@ class Returned_product:
     def to_dict(self):
         return {
             "id": self.id,
-            "description": self.description,
             "unity": self.unity,
             "return_reason": self.return_reason,
             "order_number": self.order_number,

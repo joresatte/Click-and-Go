@@ -42,7 +42,6 @@ def test_get_customers_data():
         },
         returned_product= {
             'id':'2',
-            'description':"Project Manager",
             'unity':'2',
             'return_reason':"",
             'order_number':"",
@@ -84,7 +83,6 @@ def test_get_customers_data():
         },
         returned_product= {
             'id':'2',
-            'description':"Project Manager",
             'unity':'2',
             'return_reason':"",
             'order_number':"",
@@ -133,7 +131,6 @@ def test_get_customers_data():
             },
             'returned_product': {
                 'id':'2',
-                'description':"Project Manager",
                 'unity':'2',
                 'return_reason':"",
                 'order_number':"",
@@ -174,7 +171,6 @@ def test_get_customers_data():
             },
             'returned_product': {
                 'id':'2',
-                'description':"Project Manager",
                 'unity':'2',
                 'return_reason':"",
                 'order_number':"",

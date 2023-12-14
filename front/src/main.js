@@ -28,6 +28,7 @@ import InlineMessage from 'primevue/inlinemessage';
 import Password from 'primevue/password';
 import Tag from 'primevue/tag';
 import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'   // optional
+import Message from 'primevue/message';
 
 const app= createApp(App);
 app.use(createPinia())
@@ -53,6 +54,6 @@ app.component('Dropdown', Dropdown)
 app.component('Menu', Menu)
 app.component('Rating', Rating)
 app.component('InlineMessage', InlineMessage)
-
+app.component('Message', Message)
 
 app.mount('#app')

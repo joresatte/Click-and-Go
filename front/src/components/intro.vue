@@ -1,3 +1,10 @@
+<!-- # @author: Jores Atte Mottoh
+# @date: 14/12/2023
+# @description: Component intro with methods, attributes and template
+# @project: Click and Go
+# @modified by:
+# @modified date: -->
+
 <template>
   <div v-if="showIntro">
     <div class="container">
@@ -9,12 +16,20 @@
         <p class="g">i</p>
     </div>
   </div> 
+  <span class="eroski" :style="styleObject" v-show="showContigo">{{eroski}}</span>
 </template>
 <script setup>
-import {ref, onMounted} from 'vue';
+import {ref, onMounted, reactive} from 'vue';
 import {usePiniaStore} from '@/stores/store'
 const piniaStore= usePiniaStore()
 const showIntro= ref(true)
+const eroski= ref('Contigo')
+const showContigo= ref(false)
+const styleObject = reactive({
+  color: 'white',
+  fontSize: '1em',
+  backgroundColor:''
+})
 onMounted(()=>{
 setTimeout(()=>{
   showIntro.value= false
@@ -23,6 +38,11 @@ setTimeout(()=>{
     name: 'loginPage',
   })
 }, 8000)
+setTimeout(()=>{
+  showContigo.value= true
+  styleObject.color= '#021691',
+  styleObject.fontSize= '2em'
+}, 3000)
 })
 </script>
 <style scoped>
@@ -328,6 +348,27 @@ z-index: 5;
     display: flex;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
+  }
+}
+
+span {
+  display: flex;
+  justify-self: end;
+  margin-left: 70%;
+  animation-duration: 3s;
+  animation-delay: 1s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 0%;
+  }
+
+  to {
+    margin-left: 70%;
+    width: 100%;
   }
 }
 </style>

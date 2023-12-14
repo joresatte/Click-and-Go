@@ -23,7 +23,7 @@ delivery_note_table_fields= ['id', 'note',
                              'customer_id',
                              'FOREIGN KEY(customer_id) REFERENCES customers(id) ON DELETE  CASCADE']
 
-returned_product_table_fields= ['id', 'description', 'unity', 'return_reason',
+returned_product_table_fields= ['id', 'unity', 'return_reason',
                                 'order_number', 'customer_id',
                                 'FOREIGN KEY (order_number) REFERENCES order_datas(order_number)',
                                 'FOREIGN KEY(customer_id) REFERENCES customers(id) ON DELETE  CASCADE']
@@ -46,7 +46,7 @@ order_data_table_save_fields= [ 'id', 'delivery_date', 'order_number',
 delivery_note_table_save_fields= ['id', 'note', 
                              'customer_id']
 
-returned_product_table_save_fields= ['id', 'description', 'unity', 'return_reason',
+returned_product_table_save_fields= ['id', 'unity', 'return_reason',
                                 'order_number', 'customer_id']
 
 receptor_data_table_save_fields= ['id', 'name',

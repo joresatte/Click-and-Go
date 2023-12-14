@@ -1,5 +1,12 @@
+<!-- # @author: Jores Atte Mottoh
+# @date: 14/12/2023
+# @description: appLogo with attributes and template
+# @project: Click and Go
+# @modified by:
+# @modified date: -->
+
 <template>
-  <div class=" image"><img class=" mx-auto border-round" src="../assets/img/eroski.png" alt="image eroski" /></div>
+  <section class=" image"><img class=" mx-auto border-round" src="../assets/img/eroski.png" alt="image eroski" /></section>
 </template>
 <script setup>
 import {ref} from 'vue'
@@ -9,15 +16,9 @@ let image= ref('')
 .image{
 display: flex;
 justify-content: center;
-align-items: end;
+align-items: center;
 position: relative;
 margin-top: 0;
 }
-@media (min-width: 1024px) {
-  .image {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
+
 </style>

@@ -125,6 +125,27 @@ class Customer_dataRepository:
 
         return customer
 
+    def update_data(self, request):
+        sql= U.getFullUpdateDynamicQuery(self, table_variables= ['receptor_data', 'returned_product', 'status'], tableName= "customers", listConditions= ['id'])
+
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql, 
+                       {"id": request.id,
+                        "picture": request.picture,
+                        "dni": request.dni,
+                        "cliente": request.cliente,
+                        "address": request.address,
+                        "phone": request.phone,
+                        "status": request.status,
+                        "delivery_note": json.dumps(request.delivery_note),
+                        "order_data": json.dumps(request.order_data),
+                        "orders_packages": json.dumps(request.orders_packages),
+                        "receptor_data": json.dumps(request.receptor_data),
+                        "returned_product": json.dumps(request.returned_product)
+                        })
+        conn.commit()
+
     def get_note(self, customer_id):
         sql= U.fullGetDynamicQuery(self, fields=['*'], tableName='delivery_notes', listConditions=['customer_id'])
         conn = self.create_conn()
@@ -154,7 +175,7 @@ class Customer_dataRepository:
         return order_packages
 
     def get_the_receptor(self, customer_id):
-        sql= U.fullGetDynamicQuery(self, fields=['*'], tableName='order_datas', listConditions=['customer_id'])
+        sql= U.fullGetDynamicQuery(self, fields=['*'], tableName='receptor_datas', listConditions=['customer_id'])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, {'customre_id': customer_id})
@@ -163,7 +184,7 @@ class Customer_dataRepository:
         return receptor
 
     def get_the_returned(self, customer_id):
-        sql= U.fullGetDynamicQuery(self, fields=['*'], tableName='order_datas', listConditions=['customer_id'])
+        sql= U.fullGetDynamicQuery(self, fields=['*'], tableName='returned_products', listConditions=['customer_id'])
         conn = self.create_conn()
         cursor = conn.cursor()
         cursor.execute(sql, {'customre_id': customer_id})
@@ -264,7 +285,6 @@ class Customer_dataRepository:
         cursor.execute(
             sql,
             {"id": returned.id,
-             "description": returned.description,
              "unity": returned.unity,
              "return_reason": returned.return_reason,
              "order_number": returned.order_number,

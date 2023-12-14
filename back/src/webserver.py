@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_cors import CORS
 from src.lib.utils import object_to_json
-from src.domain.customer_data import Customer_data as cliente
+from src.domain.customer_data import Customer_data as client
 from src.domain.employee import Employee
 # import requests
 import json
@@ -50,6 +50,19 @@ def create_app(repositories):
         remove_one_customer = repositories['customer_data'].deleted_record_by_id(id)
         return ""
     
+    @app.route("/api/customer_data/update/<id>", methods=["PUT"])
+    def update_customer_data(id):
+        data = request.json
+        print('---------data_request', data)
+        if id!=data["id"] and data['status']!='Entregado':
+            return '', 405
+        else:
+            client_data = client( **data)
+            repositories["customer_data"].update_data(client_data)
+            return '', 200
+
+
+
     # def pull_data_from_external_Api():
     #     url= 'https://api.covid19india.org/state_district_wise.json'
     #     header= {"Content-Type":"appliction/json"}

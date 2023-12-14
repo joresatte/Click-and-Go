@@ -1,14 +1,21 @@
+<!-- # @author: Jores Atte Mottoh
+# @date: 14/12/2023
+# @description: customersPage with methods, attributes and template
+# @project: Click and Go
+# @modified by:
+# @modified date: -->
+
 <template>
-    <div>
+    <header>
         <AppLogo/>
-    </div>
-    <div class="customers">
-        <div class="flex justify-content-start font-bold border-round">
-            <div class="flex justify-content-start font-bold border-round" style="margin-bottom: 1em;">
+    </header>
+    <section class="customers">
+        <section class="flex justify-content-start font-bold border-round">
+            <section class="flex justify-content-start font-bold border-round" style="margin-bottom: 1em;">
                 <Dropdown v-model="selected"
                     :options="options" optionLabel="text" placeholder="Filtrar" @change="onSortChange(selected.value)" />
-            </div>
-        </div>
+            </section>
+        </section>
         <!-- <div>
             <div style="margin-bottom: 0.5em;">
                 <select v-model="selected" style="height: 3em; padding: 0.5em; border-radius: 0.5em; ">
@@ -19,8 +26,8 @@
                 </select>
             </div>
         </div> -->
-        <div class="flex justify-content-between flex-wrap"  style="background-color: gray; padding: 1em; border-radius: 0.5em;">
-            <div class="flex justify-content-start">
+        <section class="flex justify-content-between flex-wrap"  style="background-color: gray; padding: 1em; border-radius: 0.5em;">
+            <section class="flex justify-content-start">
                 <span class="ml-1 p-input-icon-left ">
                     <i class="pi pi-search " style="color: blue;"/>
                     <InputText
@@ -28,15 +35,16 @@
                     placeholder="Buscar"
                     style="width: 8em; color: blue;"/>
                 </span>
-            </div>
-            <div class="flex justify-content-end">
+            </section>
+            <section class="flex justify-content-end">
                 <Button @click="activeShowList" ><i class="pi pi-bars" style="color: white;" ></i></Button>
-                <Button @click="activeShowGrid" v-if="showGridBtn"><i class="pi pi-th-large" style="color: white;" ></i></Button>
-            </div>
-        </div>
+                <Button @click="activeShowGrid" id="btnGrid" v-if="showGridBtn"><i class="pi pi-th-large" style="color: white;" ></i></Button>
+            </section>
+        </section>
             <div class="block bg-primary font-bold text-center p-4 border-round mb-3" style="margin-top: 10%;" v-if="showLoad">
             <div class="showLoad">{{ load }}</div>
         </div>
+        <Message severity="error" :sticky="sticky" :life="6000" v-if="showMessage">{{redirection}}</Message>
         <div class="list" v-show="showList">
             <div class="col-12" v-for="(item, index) in filteredData" :key="index">
                 <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4" :class="{ 'border-top-1 surface-border': index !== 0 }"
@@ -47,7 +55,7 @@
                             item.dni.toLowerCase().includes(filteredText.toLowerCase())||
                             item.status.toLowerCase().includes(filteredText.toLowerCase())? true: false">
                     <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
-                        <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                        <div class="flex flex-column align-items-center sm:align-items-start gap-3 ">
                             <img class="w-4 sm:w-5rem xl:w-2rem shadow-2 block xl:block mx-auto border-round" :src="item.picture" alt="image client" />
                             <div class="text-2xl font-bold text-900">{{ item.cliente }}</div>
                             <span class="font-semibold">{{ item.address }}</span>
@@ -64,7 +72,7 @@
                             <Button icon="pi pi-eye"
                                 label="ver"
                                 :loading="loading"
-                                @click="onclicked(item.id)"/>
+                                @click="onclicked(item.id, item.status)"/>
                         </div>
                     </div>
                 </div>
@@ -112,19 +120,19 @@
                             <Button icon="pi pi-eye"
                                     label="ver"
                                     :loading="loading"
-                                    @click="onclicked(item.id)"/>
+                                    @click="onclicked(item.id, item.status)"/>
                         </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script setup>
 import config from "@/config.js";
-import { ref, onMounted, computed, toValue, onBeforeUpdate} from "vue";
+import { ref, onMounted, computed, toValue, onBeforeUpdate, watch} from "vue";
 import {usePiniaStore} from '@/stores/store'
 import AppLogo from "@/components/appLogo.vue";
 const piniaStore= usePiniaStore()
@@ -136,6 +144,8 @@ const filteredText= ref('')
 const selected = ref();
 let currSeconds= ref(0)
 let timer= ref(null)
+const showMessage= ref(false)
+const redirection= ref('Darle click a las tres barras para ver los datos filtrados')
 const options = ref([
   {text: 'Entregado', value: 'Entregado'},
   {text: 'No entregado', value: 'No entregado'},
@@ -143,7 +153,7 @@ const options = ref([
 const response= ref()
 const fetching= ref(true)
 const error= ref()
-
+let sticky = ref(true);
 let loading= ref(false)
 const load= ref('Loading...')
 const showLoad= ref(true)
@@ -164,8 +174,9 @@ const loadData= async ()=>{
         const url= `${config.login_Path}/all_customers`
         const options= {}
         await piniaStore.getData(toValue(url), options)
-        response.value= await piniaStore.data
-        console.log(response.value)
+        response.value= await piniaStore.data.json()
+        let isString= Object.prototype.toString.call(response.value) === "[object String]" ? true: false
+        console.log('isString', isString)
     } catch (errors) {
         error.value= errors
     }finally{
@@ -182,6 +193,7 @@ const activeShowGrid=()=>{
 const activeShowList=()=>{
     showGrid.value= false
     showList.value= true
+    showMessage.value= false
 }
 
 const testJSON=(text)=> {
@@ -229,7 +241,7 @@ function resetTimer(){
 
     /* Set a new interval */ 
     timer.value = 
-        setInterval(startIdleTimer, 920000); 
+        setInterval(startIdleTimer, 3600000); 
 }
 
 function startIdleTimer(){
@@ -248,11 +260,19 @@ function startIdleTimer(){
 const filtered= (val, obj)=>{
     if(!val==''){
         obj.reduce(function(acc, e) {
-            console.log(e)
             if (e.status== val) {
                 acc.push(e);
             }
             selectedData.value= acc
+            if (selectedData.value.length<4) {
+                showGrid.value= false
+                const btn= document.getElementById("btnGrid").disabled= true;
+                showMessage.value= true
+            }else{
+                showMessage.value= false
+                // const btn= document.getElementById("btnGrid").disabled= false;
+                // console.log('disable btn', btn)
+            }
             return selectedData.value
             }, []);
         return selectedData.value
@@ -267,8 +287,7 @@ function onSortChange(e){
 }
 
 onBeforeUpdate(()=>{
-    console.log('before update data', filteredData.length) 
-    
+    console.log('before update')
 })
 
 let filteredData = computed(() => { 
@@ -278,6 +297,12 @@ let filteredData = computed(() => {
     
 })
 
+watch(() => filteredData, () => {
+    if (filteredData.length<4) {
+        showGrid.value= false
+        console.log(showGrid.value)
+    }
+}, { immediate: true })
 
 const getSeverity = (item) => {
     switch (item.status) {
@@ -292,12 +317,10 @@ const getSeverity = (item) => {
     }
 }
 
-async function onclicked(e){
-  console.log(e)
+async function onclicked(e, s){
   if(piniaStore.router.path != `/client/${e}`){
-      localStorage.setItem('pathId', JSON.stringify(e))
       piniaStore.pathId= e
-      console.log(piniaStore.pathId)
+      piniaStore.customerStatus= s
       await piniaStore.router.push({
               path: `/client/:id`,
               name: 'customerDetails',
@@ -328,11 +351,12 @@ async function onclicked(e){
   font-weight: 700;
   margin-bottom: 1em;
 }
-@media (min-width: 1024px) {
-  .customers {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
+div:hover{
+    background-color: rgb(243, 44, 127);
+}
+@media (hover: hover) {
+    div:hover {
+        background: rgb(243, 44, 127);
+    }
 }
 </style>

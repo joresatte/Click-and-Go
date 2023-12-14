@@ -1,3 +1,10 @@
+<!-- # @author: Jores Atte Mottoh
+# @date: 14/12/2023
+# @description: loginPage with methods, attributes and template
+# @project: Click and Go
+# @modified by:
+# @modified date: -->
+
 <template>
   <app-header /><br>
   <div class="login">
