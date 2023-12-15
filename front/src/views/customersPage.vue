@@ -45,6 +45,7 @@
             <div class="showLoad">{{ load }}</div>
         </div>
         <Message severity="error" :sticky="sticky" :life="6000" v-if="showMessage">{{redirection}}</Message>
+        <Message severity="error" :sticky="sticky" :life="6000" v-if="showEmptyFilterMessage">{{EmptyFilterMessage}}</Message>
         <div class="list" v-show="showList">
             <div class="col-12" v-for="(item, index) in filteredData" :key="index">
                 <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4" :class="{ 'border-top-1 surface-border': index !== 0 }"
@@ -157,7 +158,8 @@ let sticky = ref(true);
 let loading= ref(false)
 const load= ref('Loading...')
 const showLoad= ref(true)
-
+const showEmptyFilterMessage= ref(false)
+const EmptyFilterMessage= ref('No hay datos disponibles')
 onMounted(() => {
     loadData()
     const redirection = piniaStore.getIdentity()== true ? piniaStore.router.push({
@@ -264,12 +266,18 @@ const filtered= (val, obj)=>{
                 acc.push(e);
             }
             selectedData.value= acc
-            if (selectedData.value.length<4) {
+            if(selectedData.value==0){
+                showEmptyFilterMessage.value=true
+                showGrid.value= true
+            }
+            else if (selectedData.value.length>0 && selectedData.value.length<4) {
                 showGrid.value= false
                 const btn= document.getElementById("btnGrid").disabled= true;
                 showMessage.value= true
             }else{
                 showMessage.value= false
+                showEmptyFilterMessage.value= false
+                showGrid.value= true
                 // const btn= document.getElementById("btnGrid").disabled= false;
                 // console.log('disable btn', btn)
             }

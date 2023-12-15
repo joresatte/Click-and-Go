@@ -28,7 +28,8 @@ const showContigo= ref(false)
 const styleObject = reactive({
   color: 'white',
   fontSize: '1em',
-  backgroundColor:''
+  backgroundColor:'',
+  fontFamily:'cursive'
 })
 onMounted(()=>{
 setTimeout(()=>{
@@ -40,8 +41,9 @@ setTimeout(()=>{
 }, 8000)
 setTimeout(()=>{
   showContigo.value= true
-  styleObject.color= '#021691',
-  styleObject.fontSize= '2em'
+  styleObject.color= '#021691';
+  styleObject.fontSize= '2em';
+  styleObject.fontFamily= 'cursive'
 }, 3000)
 })
 </script>
@@ -67,15 +69,34 @@ height: 100vh;
 overflow: hidden;
 }
 
-body,
+/* body,
 .container {
 display: flex;
 align-items: center;
 justify-content: center;
 position: fixed;
 margin-top: 25%;
-}
+} */
 
+/* @media (max-width: 300px){
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 70%;
+  }
+} */
+
+@media (min-width: 320px) {
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    margin-top: 35%;
+  }
+}
 .container {
 width: 99%;
 height: 99%;
@@ -148,7 +169,6 @@ z-index: 5;
 @media (max-width: 420px) {
   ::before,
 ::after {
-/*   border: 1px solid red; */
 box-sizing: border-box;
 }
 
@@ -245,21 +265,6 @@ z-index: 5;
 }
 }
 
-/* animation */
-
-/* back neon animation */
-/* @keyframes bgRotate {
-0% {
-  background-image: linear-gradient(#1900ff, #f236dc, #ffeb3b);
-  transform: rotate(0deg);
-}
-100% {
-  background-image: linear-gradient(#1900ff, #f236dc, #ffeb3b);
-  transform: rotate(360deg);
-}
-} */
-
-/* container animation */
 @keyframes bgChange {
 0% {
   background-color: rgb(235, 235, 235);
@@ -351,6 +356,22 @@ z-index: 5;
   }
 }
 
+@media (min-width: 1200px) {
+  .container {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+}
+
+@media (max-width: 992px){
+  .container {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+}
+
 span {
   display: flex;
   justify-self: end;
@@ -369,6 +390,72 @@ span {
   to {
     margin-left: 70%;
     width: 100%;
+  }
+}
+@media screen and (min-width:480px) {
+  span {
+    display: flex;
+    justify-self: end;
+    margin-left: 85%;
+    animation-duration: 3s;
+    animation-delay: 1s;
+    animation-name: slidein;
+  }
+ 
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 0%;
+    }
+
+    to {
+      margin-left: 85%;
+      width: 100%;
+    }
+  }
+}
+@media screen and (max-width: 576px) and (min-width: 480px)  {
+  span {
+    display: flex;
+    justify-self: end;
+    margin-left: 79%;
+    animation-duration: 3s;
+    animation-delay: 1s;
+    animation-name: slidein;
+  }
+ 
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 0%;
+    }
+
+    to {
+      margin-left: 79%;
+      width: 100%;
+    }
+  }
+}
+@media screen and (min-width:1200px) {
+  span {
+    display: flex;
+    justify-self: end;
+    margin-left: 90%;
+    animation-duration: 3s;
+    animation-delay: 1s;
+    animation-name: slidein;
+  }
+ 
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 0%;
+    }
+
+    to {
+      margin-left: 90%;
+      width: 100%;
+    }
   }
 }
 </style>
