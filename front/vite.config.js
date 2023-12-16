@@ -33,4 +33,10 @@ export default defineConfig({
       }
     }
   },
+  build: {
+    outDir: 'dist',
+    assetsDir: '',
+    sourcemap: false,
+    minify: true,
+  }
 })

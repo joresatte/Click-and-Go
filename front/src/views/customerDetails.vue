@@ -181,7 +181,8 @@ onMounted(() => {
       const el= document.getElementById("textarea").disabled= true;
       const dn= document.getElementById("dni").disabled=true;
       const us= document.getElementById("username").disabled= true;
-      showBtn.value= false
+      const btn= document.getElementById("btnOnclick").disabled= true;
+      submit.value='Enviado'
       console.log(ele, el, dn, us)
     }
     
