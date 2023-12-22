@@ -273,7 +273,9 @@ const filtered= (val, obj)=>{
             else if (selectedData.value.length>0 && selectedData.value.length<4) {
                 showGrid.value= false
                 const btn= document.getElementById("btnGrid").disabled= true;
-                showMessage.value= true
+                if (showList.value== true){
+                    showMessage.value= false
+                }else showMessage.value= true
             }else{
                 showMessage.value= false
                 showEmptyFilterMessage.value= false
