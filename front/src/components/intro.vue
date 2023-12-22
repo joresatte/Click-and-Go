@@ -375,7 +375,7 @@ z-index: 5;
 span {
   display: flex;
   justify-self: end;
-  margin-left: 70%;
+  margin-left: 60%;
   animation-duration: 3s;
   animation-delay: 1s;
   animation-name: slidein;
@@ -388,7 +388,7 @@ span {
   }
 
   to {
-    margin-left: 70%;
+    margin-left: 60%;
     width: 100%;
   }
 }
@@ -396,7 +396,7 @@ span {
   span {
     display: flex;
     justify-self: end;
-    margin-left: 85%;
+    margin-left: 80%;
     animation-duration: 3s;
     animation-delay: 1s;
     animation-name: slidein;
@@ -409,7 +409,7 @@ span {
     }
 
     to {
-      margin-left: 85%;
+      margin-left: 80%;
       width: 100%;
     }
   }
@@ -418,7 +418,7 @@ span {
   span {
     display: flex;
     justify-self: end;
-    margin-left: 79%;
+    margin-left: 60%;
     animation-duration: 3s;
     animation-delay: 1s;
     animation-name: slidein;
@@ -431,7 +431,7 @@ span {
     }
 
     to {
-      margin-left: 79%;
+      margin-left: 60%;
       width: 100%;
     }
   }
@@ -440,7 +440,7 @@ span {
   span {
     display: flex;
     justify-self: end;
-    margin-left: 90%;
+    margin-left: 80%;
     animation-duration: 3s;
     animation-delay: 1s;
     animation-name: slidein;
@@ -453,7 +453,7 @@ span {
     }
 
     to {
-      margin-left: 90%;
+      margin-left: 80%;
       width: 100%;
     }
   }
