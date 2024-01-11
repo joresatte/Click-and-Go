@@ -6,7 +6,7 @@ from src.domain.delivery_note import Delivery_noteRepository
 from src.domain.returned_product import Returned_productRepository
 from src.domain.receptor_data import Receptor_dataRepository
 from src.domain.employee import Employee_Repository 
-
+from waitress import serve
 database_path = "data/database.db"
 
 repositories = {
@@ -20,4 +20,9 @@ repositories = {
 }
 
 app = create_app(repositories)
-app.run(debug=True, host="0.0.0.0", port="5000")
+mode= "prod"
+if __name__ == '__main__':
+    if mode== "dev":
+        app.run(debug=True, host="0.0.0.0", port="8080")
+    else:
+        serve(app, host="0.0.0.0", port=5000)
