@@ -20,7 +20,7 @@ repositories = {
 }
 
 app = create_app(repositories)
-mode= "prod"
+mode= "dev"
 if __name__ == '__main__':
     if mode== "dev":
         app.run(debug=True, host="0.0.0.0", port="8080")

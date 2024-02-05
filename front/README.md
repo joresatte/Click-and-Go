@@ -27,3 +27,10 @@ npm run dev
 ```sh
 npm run build
 ```
+### iInstall primeVue
+
+```sh
+npm install primevue
+npm install primeicons
+npm i primeflex
+```

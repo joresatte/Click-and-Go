@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from src.lib.utils import object_to_json
 from src.domain.customer_data import Customer_data as client
 from src.domain.employee import Employee
@@ -8,7 +8,7 @@ import json
 
 def create_app(repositories):
     app = Flask(__name__)
-    CORS(app)
+    CORS(app)#, resources=r'/api/*'
 
     # @app.route("/api/carrito", methods=["POST"])
     # def carrito_post_all():
@@ -25,6 +25,7 @@ def create_app(repositories):
     #     return object_to_json(employee)
     
     @app.route("/api/get_login/Authenticated", methods=["POST"])
+    @cross_origin(allow_headers=['Content-Type'])
     def get_login():
         data= request.json
         employee= repositories["employee_data"].get_by_identification_and_password(data['identification'], data ['password'])
@@ -34,11 +35,13 @@ def create_app(repositories):
             return employee.to_dict()
     
     @app.route("/api/all_customers", methods=["GET"])
+    @cross_origin(allow_headers=['Content-Type'])
     def get_customers():
         customers = repositories['customer_data'].get_all_customers()
         return object_to_json(customers)
 
     @app.route("/api/one_customer/<id>", methods=["GET"])
+    @cross_origin(allow_headers=['Content-Type'])
     def get_one_customer(id):
         one_customer = repositories['customer_data'].get_customer(id)
         if one_customer is not None:
@@ -46,11 +49,13 @@ def create_app(repositories):
 
 
     @app.route("/api/remove_one_customer/<id>", methods=["DELETE"])
+    @cross_origin(allow_headers=['Content-Type'])
     def delete_one_customer(id):
         remove_one_customer = repositories['customer_data'].deleted_record_by_id(id)
         return ""
     
     @app.route("/api/customer_data/update/<id>", methods=["PUT"])
+    @cross_origin(allow_headers=['Content-Type'])
     def update_customer_data(id):
         data = request.json
         print('---------data_request', data)
