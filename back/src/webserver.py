@@ -28,18 +28,26 @@ def create_app(repositories):
     @cross_origin(allow_headers=['Content-Type'])
     def get_login():
         data= request.json
-        employee= repositories["employee_data"].get_by_identification_and_password(data['identification'], data ['password'])
+        print(data)
+        employee= repositories["employee_data"].get_by_identification_and_password(data['identification'], data['password'])
         if employee is None or (data['password']) != employee.password or (data['identification']) != employee.identification:
             return 'invalid log In', 401
         else:
             return employee.to_dict()
     
-    @app.route("/api/all_customers", methods=["GET"])
+    @app.route("/api/all_pending/customers_data", methods=["GET"])
     @cross_origin(allow_headers=['Content-Type'])
-    def get_customers():
-        customers = repositories['customer_data'].get_all_customers()
+    def get_pending_customers():
+        customers = repositories['customer_data'].get_pending_data()
+        # get_pending_customers.__name__ = func.__name__
         return object_to_json(customers)
 
+    @app.route("/api/all_delivered/customers_data", methods=["GET"])
+    @cross_origin(allow_headers=['Content-Type'])
+    def get_delivered_customers():
+        customers = repositories['customer_data'].get_delivered_data()
+        return object_to_json(customers)
+    
     @app.route("/api/one_customer/<id>", methods=["GET"])
     @cross_origin(allow_headers=['Content-Type'])
     def get_one_customer(id):
