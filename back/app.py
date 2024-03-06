@@ -20,9 +20,9 @@ repositories = {
 }
 
 app = create_app(repositories)
-app.run(debug=True, host="0.0.0.0", port="5000")
-# mode= "dev"
-# if __name__ == '__main__':
-#     if mode== "dev":
-#     else:
-#         serve(app, host="0.0.0.0", port=5000)
+mode= "dev"
+if __name__ == '__main__':
+    if mode== "dev":
+        app.run(debug=True, host="0.0.0.0", port="5000")
+    else:
+        serve(app, host="0.0.0.0", port=8080)

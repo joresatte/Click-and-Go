@@ -16,38 +16,38 @@ def setup():
         address="4752 Hoffman Drive",
         phone="394 937 1775",
         status="No entregado",
-        delivery_note= [{
+        delivery_note= {
             'id':'12',
             'note':"Construction Expeditor",
-            'customer_id':'1'}],
-        order_data= [{
+            'customer_id':'1'},
+        order_data= {
             'id':'2',
             'delivery_date':"3/7/2023",
             'delivery_time':"12:00",
             'order_number':'85',
             'delivery_time_interval':"12:00 - 12:30 ",
             'customer_id': '2'
-        }],
-        orders_packages= [{
+        },
+        orders_packages= {
             'id':'3',
-            'drawers':[{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'}],
-            'bags':[{"cold":'2', "frozen":'1'}],
+            'drawers':{"cold":'2', "frozen":'3', "dry":'5', "out of drawers": '0'},
+            'bags':{"cold":'2', "frozen":'1'},
             'substitutions': "No",
             'customer_id':'1' 
-        }],
-        receptor_data= [{
+        },
+        receptor_data= {
             'id':'6',
             'name':"",
             'DNI':"test",
             'customer_id':'1'
-        }],
-        returned_product= [{
+        },
+        returned_product= {
             'id':'2',
             'unity':'2',
             'return_reason':"test",
             'order_number':"",
             'customer_id':'1'
-        }]
+        }
     )
     customer_data_repository.save_customer(first_cliente)
     return client
