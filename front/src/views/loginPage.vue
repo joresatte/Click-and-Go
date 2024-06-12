@@ -51,7 +51,7 @@ async function onclicked(){
     }),
   })
   if(loginUser['identification'] && loginUser['password'] != ''){
-      const response= await fetch(`${config.login_Path}/get_login/Authenticated`, settings)
+      const response= await fetch(`${config.path}/auth`, settings)
                               .catch((err) => (error.value = err))
       const requestStatusCode = response.ok
       console.log('request Status Code ', requestStatusCode)
@@ -60,8 +60,8 @@ async function onclicked(){
         console.log(data.value)
         localStorage.setItem('dataIdentity', JSON.stringify(data.value))
         piniaStore.router.push({
-          path: '/customersPage',
-          name: 'customersPage',
+          path: '/optionPage',
+          name: 'optionPage',
         })
       }
       if(!requestStatusCode== true){

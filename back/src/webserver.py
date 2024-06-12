@@ -8,7 +8,7 @@ import json
 
 def create_app(repositories):
     app = Flask(__name__)
-    CORS(app)
+    CORS(app)#, resources=r'/api/*'
 
     # @app.route("/api/carrito", methods=["POST"])
     # def carrito_post_all():
@@ -24,23 +24,31 @@ def create_app(repositories):
     #     repositories["employee_data"].save(employee)
     #     return object_to_json(employee)
     
-    @app.route("/api/get_login/Authenticated", methods=["POST"])
+    @app.route("/auth", methods=["POST"])
     @cross_origin(allow_headers=['Content-Type'])
     def get_login():
         data= request.json
-        employee= repositories["employee_data"].get_by_identification_and_password(data['identification'], data ['password'])
+        print(data)
+        employee= repositories["employee_data"].get_by_identification_and_password(data['identification'], data['password'])
         if employee is None or (data['password']) != employee.password or (data['identification']) != employee.identification:
             return 'invalid log In', 401
         else:
             return employee.to_dict()
     
-    @app.route("/api/all_customers", methods=["GET"])
+    @app.route("/pending", methods=["GET"])
     @cross_origin(allow_headers=['Content-Type'])
-    def get_customers():
-        customers = repositories['customer_data'].get_all_customers()
+    def get_pending_customers():
+        customers = repositories['customer_data'].get_pending_data()
+        # get_pending_customers.__name__ = func.__name__
         return object_to_json(customers)
 
-    @app.route("/api/one_customer/<id>", methods=["GET"])
+    @app.route("/delivered", methods=["GET"])
+    @cross_origin(allow_headers=['Content-Type'])
+    def get_delivered_customers():
+        customers = repositories['customer_data'].get_delivered_data()
+        return object_to_json(customers)
+    
+    @app.route("/<id>", methods=["GET"])
     @cross_origin(allow_headers=['Content-Type'])
     def get_one_customer(id):
         one_customer = repositories['customer_data'].get_customer(id)
@@ -48,13 +56,13 @@ def create_app(repositories):
             return object_to_json(one_customer)
 
 
-    @app.route("/api/remove_one_customer/<id>", methods=["DELETE"])
+    @app.route("/del/<id>", methods=["DELETE"])
     @cross_origin(allow_headers=['Content-Type'])
     def delete_one_customer(id):
         remove_one_customer = repositories['customer_data'].deleted_record_by_id(id)
         return ""
     
-    @app.route("/api/customer_data/update/<id>", methods=["PUT"])
+    @app.route("/customer/<id>", methods=["PUT"])
     @cross_origin(allow_headers=['Content-Type'])
     def update_customer_data(id):
         data = request.json

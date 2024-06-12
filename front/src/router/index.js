@@ -15,15 +15,30 @@ const router = createRouter({
       component: () => import('../views/loginPage.vue')
     },
     {
-      path: '/customersPage',
-      name: 'customersPage',
-      component: () => import('../views/customersPage.vue')
+      path: '/pending',
+      name: 'pending',
+      component: () => import('../views/pendingCustomersPage.vue')
+    },
+    {
+      path: '/delivered',
+      name: 'delivered',
+      component: () => import('../views/deliveredCustomersPage.vue')
+    },
+    {
+      path: '/optionPage',
+      name: 'optionPage',
+      component: () => import('../views/optionPage.vue')
     },
     {
       path: '/client/:id',
       name: 'customerDetails',
       component: () => import('../views/customerDetails.vue')
     },
+    // {
+    //   path: '/optionPage',
+    //   name: 'optionPage',
+    //   component: () => import('../views/optionPage.vue')
+    // },
   ]
 })
 

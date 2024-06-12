@@ -78,12 +78,36 @@ class Customer_dataRepository:
         cursor.executescript(sql)
         conn.commit()
 
-    def get_all_customers(self):
+    def get_delivered_data(self):
         customers_data_list= []
-        sql = U.fullGetDynamicQuery(self, fields=['*'], tableName='customers', listConditions=[])
+        sql = U.fullGetDynamicQuery(self, fields=['*'], tableName='customers', listConditions=['status'])
+        print('query',sql)
         conn = self.create_conn()
         cursor = conn.cursor()
-        cursor.execute(sql)
+        cursor.execute(sql, {'status': 'Entregado'})
+        data = cursor.fetchall()
+        customers_data_list.extend([Customer_data(
+            id=item['id'],
+            picture=item['picture'],
+            cliente=item['cliente'],
+            dni=item['dni'],
+            address=item['address'],
+            phone=item['phone'],
+            status=item['status'],
+            delivery_note= json.loads(item['delivery_note']),
+            order_data= json.loads(item['order_data']),
+            orders_packages= json.loads(item['orders_packages']),
+            receptor_data= json.loads(item['receptor_data']),
+            returned_product= json.loads(item['returned_product'])) for item in data])
+        return customers_data_list
+    
+    def get_pending_data(self):
+        customers_data_list= []
+        sql = U.fullGetDynamicQuery(self, fields=['*'], tableName='customers', listConditions=['status'])
+        print('query',sql)
+        conn = self.create_conn()
+        cursor = conn.cursor()
+        cursor.execute(sql, {'status': 'No entregado'})
         data = cursor.fetchall()
         customers_data_list.extend([Customer_data(
             id=item['id'],

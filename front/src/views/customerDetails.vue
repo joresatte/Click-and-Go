@@ -10,7 +10,7 @@
         <AppLogo/>
     </header>
     <div class="flex align-items-stretch flex-wrap">
-        <info class="flex align-items-center justify-content-center bg-primary px-3 py-1 font-bold border-round m-2" style="width: 50%;" msg="Comprobante de la entrega"/>
+        <info class="flex align-items-center justify-content-center font-bold border-round m-1" style="height: 2.5em; width: 55%; background-color: blue; color: white;" msg="Comprobante de la entrega"/>
     </div> 
     <section class="block bg-primary font-bold text-center p-4 border-round" style="height: 4em;" v-if="showLoad">
        {{ load }}
@@ -19,27 +19,27 @@
         <div class="contain">
             <h1>Datos cliente</h1>
             <div class="customer">
-                <h4>Cliente:</h4> {{ response.dict.cliente }}
-                <h4>DNI:</h4> {{ response.dict.dni }}
-                <h4>Direccion:</h4> {{ response.dict.address }}
-                <h4>Telefono:</h4> {{ response.dict.phone }}
-                <h4>Estado pedido:</h4> {{ response.dict.status }}
+                <h4 style="color: blue" >Cliente:</h4> {{ response.dict.cliente }}
+                <h4 style="color: blue" >DNI:</h4> {{ response.dict.dni }}
+                <h4 style="color: blue" >Direccion:</h4> {{ response.dict.address }}
+                <h4 style="color: blue" >Telefono:</h4> {{ response.dict.phone }}
+                <h4 style="color: blue" >Estado pedido:</h4> {{ response.dict.status }}
             </div>
         </div>
         <div class="contain">
             <h1 >Datos pedido</h1>
             <div class="customer">
-                <h4>Fecha de entrega:</h4> {{ response.order_data.delivery_date }}
-                <h4>Numero de pedido:</h4> {{ response.order_data.order_number}}
-                <h4>Hora limite:</h4> {{ response.order_data.delivery_time }}
-                <h4>Franja Horaria:</h4> {{ response.order_data.delivery_time_interval }}
+                <h4 style="color: blue" >Fecha de entrega:</h4> {{ response.order_data.delivery_date }}
+                <h4 style="color: blue" >Numero de pedido:</h4> {{ response.order_data.order_number}}
+                <h4 style="color: blue" >Hora limite:</h4> {{ response.order_data.delivery_time }}
+                <h4 style="color: blue" >Franja Horaria:</h4> {{ response.order_data.delivery_time_interval }}
             </div>
         </div>
         <div class="contain">
             <h1 >Bultos pedido</h1>
             <div class="order_drawers">
                 <section class="block_section">
-                    <h2>Cajones</h2>
+                    <h2 style="color: blue" >Cajones</h2>
                     <div class="block_div flex flex-row flex-wrap justify-content-center align-items-center">
                         <div class="block">
                             <h4 class="flex flex-row flex-wrap justify-content-center align-items-center">Frio</h4><span class="span_block">{{ response.drawers.cold }}</span>
@@ -56,7 +56,7 @@
                     </div>
                 </section>
                 <section class="block_section">
-                    <h2>Bolsas</h2>
+                    <h2 style="color: blue" >Bolsas</h2>
                     <div class="block_div flex flex-row flex-wrap justify-content-center align-items-center">
                         <div class="block">
                             <h4 class="flex flex-row flex-wrap justify-content-center align-items-center">Frio</h4><span class="span_block">{{ response.bags.cold }}</span>
@@ -67,7 +67,7 @@
                     </div>
                 </section>
                 <section class="block_section">
-                    <h2>Sustituciones</h2>
+                    <h2 style="color: blue" >Sustituciones</h2>
                     <div class="block_div flex flex-row flex-wrap justify-content-center align-items-center">
                         <div class="block">
                             <h4 class="flex flex-row flex-wrap justify-content-center align-items-center">{{ response.orders_packages.substitutions}}</h4>
@@ -105,14 +105,14 @@
         <div class="receptor">
             <div class="card flex justify-content-center">
                 <div class="flex flex-column gap-2">
-                    <label for="dni">DNI del receptor</label>
+                    <label for="dni" style="color: blue" ><b>DNI del receptor</b></label>
                     <InputText id="dni" v-model="response.receptor_data.DNI" aria-describedby="dni-help" />
                     <!-- <small id="DNI-help">apunta aqui el DNI del recpetor del pedido.</small> -->
                 </div>
             </div><br>
             <div class="card flex justify-content-center">
                 <div class="flex flex-column gap-2">
-                    <label for="username">Nombre del receptor</label>
+                    <label for="username" style="color: blue" ><b>Nombre del receptor</b></label>
                     <InputText id="username" v-model="response.receptor_data.name" aria-describedby="username-help" />
                     <!-- <small id="username-help">apunta aqui el nombre del recpetor del pedido.</small> -->
                 </div>
@@ -207,7 +207,7 @@ const leavePath= onBeforeRouteUpdate (()=>{
 const loadCustmer= async ()=>{
 
     try {
-        const url= `${config.login_Path}/one_customer/${piniaStore.pathId}`
+        const url= `${config.path}/${piniaStore.pathId}`
         const options= {}
         await piniaStore.getData(toValue(url), options)
         response.dict= await piniaStore.data.json()
@@ -259,7 +259,7 @@ const onClicked=async()=>{
         submit.value= 'Enviado'
         console.log(response.receptor_data.DNI ,response.receptor_data.name, 
         response.returned_product.return_reason, response.returned_product.unity)
-        const url= `${config.login_Path}/customer_data/update/${piniaStore.pathId}`
+        const url= `${config.path}/customer/${piniaStore.pathId}`
         const options= {
             method: "PUT",
             headers: {

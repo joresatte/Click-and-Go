@@ -18,7 +18,7 @@ def test_valid_employee_data():
     body= {
         'identification':'test_identification',
         'password':'test_password'}
-    response = client.post("/api/get_login/Authenticated", json= body)
+    response = client.post("/auth", json= body)
     assert response.status_code == 200
     if response.status_code==200:
         assert response.json=={'identification':'test_identification'}
@@ -38,7 +38,7 @@ def test_invalid_employee_data():
     body= {
         'identification':'test_identification',
         'password':'password'}
-    response = client.post("/api/get_login/Authenticated", json= body)
+    response = client.post("/auth", json= body)
     assert response.status_code != 200
     if response.status_code!=200:
         assert response.status_code== 401
@@ -58,7 +58,7 @@ def test_other_invalid_employee_data():
     body= {
         'identification':'identification',
         'password':'test_password'}
-    response = client.post("/api/get_login/Authenticated", json= body)
+    response = client.post("/auth", json= body)
     assert response.status_code != 200
     if response.status_code!=200:
         assert response.status_code== 401

@@ -29,6 +29,9 @@ import Password from 'primevue/password';
 import Tag from 'primevue/tag';
 import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'   // optional
 import Message from 'primevue/message';
+import Panel from 'primevue/panel';
+import Avatar from 'primevue/avatar';
+import AvatarGroup from 'primevue/avatargroup';   //Optional for grouping
 
 const app= createApp(App);
 app.use(createPinia())
@@ -55,5 +58,8 @@ app.component('Menu', Menu)
 app.component('Rating', Rating)
 app.component('InlineMessage', InlineMessage)
 app.component('Message', Message)
+app.component('Panel', Panel)
+app.component('Avatar', Avatar)
+app.component('AvatarGroup ', AvatarGroup )
 
 app.mount('#app')

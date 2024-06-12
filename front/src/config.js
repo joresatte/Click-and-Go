@@ -1,5 +1,5 @@
 export default{
-    // api_Path:'http://localhost:5000/api',
+    path:'http://localhost:5000',
     // regist_Path:'http://localhost:5000/api',
-    login_Path:'http://localhost:5000/api', 
+    //path:'https://clickandgobackend.onrender.com', 
 }
