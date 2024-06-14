@@ -1,9 +1,9 @@
 <script setup>
-  import intro from '@/components/intro.vue';
+import intro from '@/components/introApp.vue'
 </script>
 
 <template>
   <main>
-    <intro/>
+    <intro />
   </main>
 </template>

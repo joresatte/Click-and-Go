@@ -6,19 +6,17 @@
 # @modified date: -->
 
 <template>
-  <section class=" image"><img class=" mx-auto border-round" src="../assets/img/eroski.png" alt="image eroski" /></section>
+  <section class="image">
+    <img class="mx-auto border-round" src="@/assets/img/eroski.png" alt="image eroski" />
+  </section>
 </template>
-<script setup>
-import {ref} from 'vue'
-let image= ref('')
-</script>
+<script setup></script>
 <style scoped>
-.image{
-display: flex;
-justify-content: center;
-align-items: center;
-position: relative;
-margin-top: 0;
+.image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 0;
 }
-
 </style>

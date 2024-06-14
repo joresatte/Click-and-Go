@@ -1,3 +1,4 @@
+// eslint-disable-next-line vue/multi-word-component-names
 <script setup>
 defineProps({
   msg: {
@@ -14,7 +15,6 @@ defineProps({
 </template>
 
 <style scoped>
-
 @media (min-width: 1024px) {
   .info h4 {
     text-align: left;

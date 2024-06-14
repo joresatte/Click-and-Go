@@ -27,18 +27,13 @@ const router = createRouter({
     {
       path: '/optionPage',
       name: 'optionPage',
-      component: () => import('../views/optionPage.vue')
+      component: () => import('../views/option/optionPage.vue')
     },
     {
       path: '/client/:id',
       name: 'customerDetails',
       component: () => import('../views/customerDetails.vue')
-    },
-    // {
-    //   path: '/optionPage',
-    //   name: 'optionPage',
-    //   component: () => import('../views/optionPage.vue')
-    // },
+    }
   ]
 })
 
